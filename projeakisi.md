@@ -1,4 +1,4 @@
-# 1. HAFTA ÇALIŞMALARI (6 Mart - 13 Mart 2026)
+# 1. HAFTA ÇALIŞMALARI (6 Mart - 12 Mart 2026)
 ---
 
 ## 1.1 Proje Analizi ve Kapsam Tanımlama
