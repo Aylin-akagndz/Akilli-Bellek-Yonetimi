@@ -80,7 +80,7 @@ Seçilen **C++ tabanlı backend** ve **Python tabanlı frontend** mimarisi, proj
 
 ---
 
-## 👩‍💻 Sümeyra Adıyaman – Gereksinim Toplama ve Paydaş Analizi
+## 1.3 👩‍💻 Sümeyra Adıyaman – Gereksinim Toplama ve Paydaş Analizi
 
 ### Görev Tanımı
 Bu görev kapsamında proje paydaşları belirlenmiş, paydaşların ihtiyaçları analiz edilmiş ve bu ihtiyaçlara göre sistem gereksinimleri oluşturulmuştur. Ayrıca belirlenen gereksinimler önem derecelerine göre önceliklendirilmiştir.
