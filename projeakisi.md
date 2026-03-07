@@ -159,7 +159,7 @@ Projeden etkilenen veya projeyi kullanacak kişiler aşağıdaki şekilde belirl
 
 ## Hafta 1
 
-## Mustafa Şahingöz
+### Mustafa Şahingöz
 Porje analizi ve kapsam tanımlama yapıldı.
 
 ### Yusuf Tuğra Deveci
