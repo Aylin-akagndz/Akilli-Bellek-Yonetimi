@@ -76,3 +76,21 @@ Seçilen **C++ tabanlı backend** ve **Python tabanlı frontend** mimarisi, proj
 
 > *Sistem kaynaklarını sömüren değil, onları özgürleştiren bir yazılımın temeli atılmıştır.*
 
+
+
+
+# Proje Akışı
+
+## Hafta 1
+
+## Mustafa Şahingöz
+Proje Analizi ve Kapsam Tanımlama yapıldı.
+
+### Yusuf Tuğra Deveci
+Bellek optimizasyonu için teknolojiler araştırıldı.
+
+### Sümeyra Adıyaman
+Paydaş analizi ve gereksinimler belirlendi.
+
+
+
