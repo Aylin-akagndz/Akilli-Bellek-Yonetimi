@@ -50,3 +50,80 @@ Seçilen **C++ tabanlı backend** ve **Python tabanlı frontend** mimarisi, proj
 
 > *Sistem kaynaklarını sömüren değil, onları özgürleştiren bir yazılımın temeli atılmıştır.*
 
+---
+
+---
+
+## 👩‍💻 Sümeyra Adıyaman – Gereksinim Toplama ve Paydaş Analizi
+
+### Görev Tanımı
+Bu görev kapsamında proje paydaşları belirlenmiş, paydaşların ihtiyaçları analiz edilmiş ve bu ihtiyaçlara göre sistem gereksinimleri oluşturulmuştur. Ayrıca belirlenen gereksinimler önem derecelerine göre önceliklendirilmiştir.
+
+---
+
+## Paydaşlar
+
+Projeden etkilenen veya projeyi kullanacak kişiler aşağıdaki şekilde belirlenmiştir:
+
+- Yazılım geliştiriciler
+- Sistem yöneticileri
+- Son kullanıcılar
+- Proje yöneticileri
+
+---
+
+## Paydaş İhtiyaçları
+
+### Yazılım Geliştiriciler
+- Programların bellek kullanımını analiz edebilmek
+- Bellek sızıntılarını tespit edebilmek
+- Kod performansını artırmak için analiz sonuçlarını inceleyebilmek
+
+### Sistem Yöneticileri
+- Sunucularda çalışan uygulamaların RAM kullanımını izlemek
+- Gereksiz bellek tüketimini azaltmak
+- Sistem performansını artırmak
+
+### Son Kullanıcılar
+- Daha hızlı çalışan uygulamalar kullanmak
+- Uygulamaların stabil çalışması
+
+### Proje Yöneticileri
+- Sistem kaynaklarının daha verimli kullanılmasını sağlamak
+- Performans problemlerini azaltmak
+
+---
+
+## Fonksiyonel Gereksinimler
+
+- Sistem çalışan uygulamaların RAM kullanımını analiz edebilmelidir.
+- Sistem bellek sızıntılarını tespit edebilmelidir.
+- Sistem analiz sonuçlarını kullanıcıya rapor halinde sunabilmelidir.
+- Sistem gereksiz bellek kullanımını tespit edebilmelidir.
+- Sistem geliştiricilere bellek optimizasyonu hakkında öneriler sunabilmelidir.
+
+---
+
+## Fonksiyonel Olmayan Gereksinimler
+
+- Sistem farklı işletim sistemlerinde çalışabilecek şekilde tasarlanmalıdır.
+- Sistem kullanıcı dostu olmalıdır.
+- Analiz işlemleri mümkün olduğunca hızlı gerçekleştirilmelidir.
+- Sistem büyük uygulamalarda da analiz yapabilecek kapasitede olmalıdır.
+
+---
+
+## Gereksinim Önceliklendirme
+
+### Must Have (Olmazsa Olmaz)
+- RAM kullanım analizi
+- Bellek sızıntısı tespiti
+- Analiz sonuçlarının raporlanması
+
+### Should Have (Önemli)
+- Bellek optimizasyonu önerileri
+- Detaylı analiz çıktıları
+
+### Could Have (Ek Özellik)
+- Grafiksel raporlama
+- Kullanıcı dostu görsel arayüz
