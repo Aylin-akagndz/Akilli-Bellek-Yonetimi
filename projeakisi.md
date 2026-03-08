@@ -160,7 +160,7 @@ Projeden etkilenen veya projeyi kullanacak kişiler aşağıdaki şekilde belirl
 ## Hafta 1
 
 ### Mustafa Şahingöz
-Porje analizi ve kapsam tanımlama yapıldı.
+Proje analizi ve kapsam tanımlama yapıldı.
 
 ### Yusuf Tuğra Deveci
 Bellek optimizasyonu için teknolojiler araştırıldı.
