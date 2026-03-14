@@ -1,6 +1,9 @@
+fta1-mustafasahingoz
+=======
 
 # 1.2 🛡️ Bellek Optimizasyonu İçin Potansiyel Teknolojiler ve Stratejik Seçim Raporu
 =======
+
 # 1. HAFTA ÇALIŞMALARI (6 Mart - 12 Mart 2026)
 ---
 
@@ -27,8 +30,10 @@
 **4. Mevcut Bellek Optimizasyonu Yaklaşımları ve Araç Araştırması**
 
 * **Manuel Yaklaşımlar:** Geliştiricilerin bellek tahsislerini (`malloc/free` veya `new/delete`) manuel loglamasıdır. İnsan hatasına açıktır ve büyük projelerde sürdürülebilir değildir.
-## 1.2 🛡️ Bellek Optimizasyonu İçin Potansiyel Teknolojiler ve Stratejik Seçim Raporu
 
+
+
+=======
 
 **Proje Adı:** Akıllı Bellek Yönetim Uygulaması  
 **Ekip:** RAM Kurtarıcıları  
@@ -215,6 +220,7 @@ Paydaş analizi ve gereksinimler belirlendi.
 
 ### Semanur Buhan
 Geliştirme ortamı yapılandırılması ve kurulumu tamamlandı.
+
 
 
 
