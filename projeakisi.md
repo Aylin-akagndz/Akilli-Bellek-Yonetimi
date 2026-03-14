@@ -1,9 +1,3 @@
-fta1-mustafasahingoz
-=======
-
-# 1.2 🛡️ Bellek Optimizasyonu İçin Potansiyel Teknolojiler ve Stratejik Seçim Raporu
-=======
-
 # 1. HAFTA ÇALIŞMALARI (6 Mart - 12 Mart 2026)
 ---
 
@@ -13,7 +7,7 @@ fta1-mustafasahingoz
 
 **1. Projenin Temel Hedefleri**
 
-* Elde edilen teknik verileri yapılandırılmış bir formatta işleyerek arayüz üzerinden kullanıcıya raporlamak.
+* C++ ile geliştirilen yazılımlardaki bellek sızıntılarını (memory leak) ve hatalı bellek tahsislerini çalışma zamanında (runtime) tespit eden dinamik bir analiz aracı geliştirmek.
 * Arka planda çalışan analiz motorunun ürettiği karmaşık terminal çıktılarını, Python tabanlı kullanıcı dostu bir grafik arayüz (GUI) ile görselleştirerek (grafikler, metrikler ve uyarılar halinde) raporlamak.
 
 **2. Proje Kapsamı**
@@ -30,70 +24,58 @@ fta1-mustafasahingoz
 **4. Mevcut Bellek Optimizasyonu Yaklaşımları ve Araç Araştırması**
 
 * **Manuel Yaklaşımlar:** Geliştiricilerin bellek tahsislerini (`malloc/free` veya `new/delete`) manuel loglamasıdır. İnsan hatasına açıktır ve büyük projelerde sürdürülebilir değildir.
-
-
-
-=======
+## 1.2 🛡️ Bellek Optimizasyonu İçin Potansiyel Teknolojiler ve Stratejik Seçim Raporu
 
 **Proje Adı:** Akıllı Bellek Yönetim Uygulaması  
 **Ekip:** RAM Kurtarıcıları  
 **Hazırlayan:** Yusuf Tuğra Deveci  
-**Tarih:** 6 Mart 2026
+**Tarih:** 6 Mart 2026  
 
 ---
 
-### 🎯 1. GİRİŞ VE ARAŞTIRMA KAPSAMI
+## 🎯 1. GİRİŞ VE ARAŞTIRMA KAPSAMI
 Bu rapor, **"RAM Kurtarıcıları"** ekibinin geliştireceği uygulamanın teknolojik altyapısını belirlemek amacıyla hazırlanmıştır. Projemizin temel odağı; sistem kaynaklarını en az seviyede tüketen (*minimum memory footprint*) ve anlık tepki verebilen yüksek performanslı bir bellek yönetim aracı inşa etmektir.
 
 ---
 
-### 🛠️ 2. SEÇİLEN TEKNOLOJİ YIĞINI (TECH STACK) VE ANALİZİ
+## 🛠️ 2. SEÇİLEN TEKNOLOJİ YIĞINI (TECH STACK) VE ANALİZİ
 
-#### 2.1. Sistem Motoru (Backend): C++ ve Rust Karşılaştırması
+### 2.1. Sistem Motoru (Backend): C++ ve Rust Karşılaştırması
 Araştırmalarımız sonucunda projenin çekirdek motoru için **C++** dili seçilmiştir.
-* **Neden C++?:** C++, donanım seviyesinde doğrudan bellek yönetimi (malloc/free) yapmamıza olanak tanıyan en güçlü dildir.
+
+* **Neden C++?:** C++, donanım seviyesinde doğrudan bellek yönetimi (`malloc`/`free`) yapmamıza olanak tanıyan en güçlü dildir.
 * **"Milimetrik" Optimizasyon:** Belleğin her bir byte'ını manuel olarak kontrol etme imkanını sadece bu seviyedeki diller sunar.
 * **Neden Rust Değil?:** Rust güvenli bir alternatif olsa da, projemizin "bellek üzerinde tam hakimiyet" ve "geleneksel sistem araçlarıyla uyum" hedefi için C++'ın esnekliği daha uygun görülmüştür.
 
-#### 2.2. Kullanıcı Paneli (Frontend): Python Hibrit Modeli
+### 2.2. Kullanıcı Paneli (Frontend): Python Hibrit Modeli
 Kullanıcının sistemi izleyeceği arayüz için **Python** tercih edilmiştir.
-* **Stratejik Sebep:** Bellek yönetimi gibi ağır işleri C++ motoru yaparken, bu verileri görselleştirmek için Python'ın zengin grafik kütüphanelerinden faydalanılacaktır.
+> **Stratejik Sebep:** Bellek yönetimi gibi ağır işleri C++ motoru yaparken, bu verileri görselleştirmek için Python'ın zengin grafik kütüphanelerinden faydalanılacaktır.
 
-
-#### 2.3. Veri Kaynağı: Linux /proc Sanal Dosya Sistemi
-Sistem verilerini toplamak için dış kütüphaneler yerine Linux çekirdeğinin (kernel) sunduğu **/proc** sistemi kullanılacaktır.
-=======
-### 2.3. Veri Kaynağı: Linux /proc Sanal Dosya Sistemi
-
+### 2.3. Veri Kaynağı: Linux `/proc` Sanal Dosya Sistemi
 Sistem verilerini toplamak için dış kütüphaneler yerine Linux çekirdeğinin (kernel) sunduğu `/proc` sistemi kullanılacaktır.
-
 * **Teknik Üstünlük:** `/proc/meminfo` gibi dosyalar diskte yer kaplamayan, doğrudan RAM'deki canlı veriyi yansıtan sanal dosyalardır. Bu dosyaları okuyarak sistemin o anki "gerçek röntgenini" en hızlı haliyle çekmiş olacağız.
-* **Çapraz Platform (Cross-Platform) Uyumluluğu:** `/proc` mimarisi yalnızca Linux çekirdeğine özgü olsa da, projenin Windows ve macOS gibi farklı işletim sistemlerinde de çalışabilmesi güvence altına alınmıştır. Bu uyumluluğu sağlamak için; C++ tabanlı arka uç (backend) kodları Windows ortamında **WSL2**, macOS ortamında ise **sanallaştırma (Docker/VM)** teknolojileri kullanılarak izole bir Linux çekirdeğinde çalıştırılacaktır. Python tabanlı kullanıcı arayüzü (frontend) ise işletim sisteminden bağımsız olarak çalışarak bu verileri ekrana yansıtacaktır.
 
-
-
-#### 2.4. Denetim Aracı: Valgrind (Memcheck)
+### 2.4. Denetim Aracı: Valgrind (Memcheck)
 Yazılımın kalitesini garanti altına almak için **Valgrind** analiz aracı kullanılacaktır.
 * **Kritik Görev:** Manuel bellek yönetiminde oluşabilecek en küçük **bellek sızıntılarını** (*memory leaks*) bile tespit ederek, programın RAM tüketiminin sabit kalmasını sağlayacaktır.
 
 ---
 
-### 🚫 3. DİĞER TEKNOLOJİLERİN ELENME GEREKÇELERİ
+## 🚫 3. DİĞER TEKNOLOJİLERİN ELENME GEREKÇELERİ
 
-#### 3.1. Java ve .NET Ekosisteminin Riskleri
+### 3.1. Java ve .NET Ekosisteminin Riskleri
 Java ve C# gibi diller, kendi çalışma ortamları (*Virtual Machine*) için başlangıçta yüksek miktarda RAM tüketirler. Ayrıca **Garbage Collector** (Çöp Toplayıcı) mekanizması, sistemi öngörülemez zamanlarda durdurabilir.
 
-#### 3.2. Saf Python Yaklaşımının Verimsizliği
+### 3.2. Saf Python Yaklaşımının Verimsizliği
 Eğer tüm projeyi Python ile yazsaydık, dilin kendi iç yapısı nedeniyle basit bir tam sayıyı saklamak için bile C++'a göre **5-10 kat daha fazla** yer harcardık. Bu durum, projemizin "bellek kurtarma" misyonuyla çelişmektedir.
 
 ---
 
-### 🏁 4. SONUÇ
-Seçilen **C++ tabanlı backend** ve **Python tabanlı frontend** mimarisi, projemizin hem profesyonel bir sistem aracı gibi çalışmasını hem de modern bir kullanıcı arayüzüne sahip olmasını sağlayacaktır.
+## 🏁 4. SONUÇ
+Seçilen **C++ tabanlı backend** ve **Python tabanlı frontend** mimarisi, projemizin hem profesyonel bir sistem aracı gibi çalışmasını hem de modern bir kullanıcı arayüzüne sahip olmasını sağlayacaktır. 
 
+> *Sistem kaynaklarını sömüren değil, onları özgürleştiren bir yazılımın temeli atılmıştır.*
 
-Sistem kaynaklarını sömüren değil, onları özgürleştiren bir yazılımın temeli atılmıştır.
-=======
 ---
 
 ---
@@ -144,7 +126,7 @@ Projeden etkilenen veya projeyi kullanacak kişiler aşağıdaki şekilde belirl
 - Sistem bellek sızıntılarını tespit edebilmelidir.
 - Sistem analiz sonuçlarını kullanıcıya rapor halinde sunabilmelidir.
 - Sistem gereksiz bellek kullanımını tespit edebilmelidir.
-- Sistem geliştircilere bellek kullanımını iyileştirmeye yönelik öneriler sunulabilir.
+- Sistem geliştiricilere bellek optimizasyonu hakkında öneriler sunabilmelidir.
 
 ---
 
@@ -210,7 +192,7 @@ Yapılan kurulumlar terminal üzerinden test edilerek derleyici ve analiz araçl
 ## Hafta 1
 
 ### Mustafa Şahingöz
-Proje analizi ve kapsam tanımlama yapıldı.
+Porje analizi ve kapsam tanımlama yapıldı.
 
 ### Yusuf Tuğra Deveci
 Bellek optimizasyonu için teknolojiler araştırıldı.
@@ -220,7 +202,5 @@ Paydaş analizi ve gereksinimler belirlendi.
 
 ### Semanur Buhan
 Geliştirme ortamı yapılandırılması ve kurulumu tamamlandı.
-
-
 
 
