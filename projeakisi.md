@@ -1,6 +1,5 @@
 
-# 1.2 🛡️ Bellek Optimizasyonu İçin Potansiyel Teknolojiler ve Stratejik Seçim Raporu
-=======
+
 # 1. HAFTA ÇALIŞMALARI (6 Mart - 12 Mart 2026)
 ---
 
@@ -55,9 +54,7 @@ Kullanıcının sistemi izleyeceği arayüz için **Python** tercih edilmiştir.
 * **Stratejik Sebep:** Bellek yönetimi gibi ağır işleri C++ motoru yaparken, bu verileri görselleştirmek için Python'ın zengin grafik kütüphanelerinden faydalanılacaktır.
 
 
-#### 2.3. Veri Kaynağı: Linux /proc Sanal Dosya Sistemi
-Sistem verilerini toplamak için dış kütüphaneler yerine Linux çekirdeğinin (kernel) sunduğu **/proc** sistemi kullanılacaktır.
-=======
+
 ### 2.3. Veri Kaynağı: Linux /proc Sanal Dosya Sistemi
 
 Sistem verilerini toplamak için dış kütüphaneler yerine Linux çekirdeğinin (kernel) sunduğu `/proc` sistemi kullanılacaktır.
