@@ -51,9 +51,13 @@ Araştırmalarımız sonucunda projenin çekirdek motoru için **C++** dili seç
 Kullanıcının sistemi izleyeceği arayüz için **Python** tercih edilmiştir.
 > **Stratejik Sebep:** Bellek yönetimi gibi ağır işleri C++ motoru yaparken, bu verileri görselleştirmek için Python'ın zengin grafik kütüphanelerinden faydalanılacaktır.
 
-### 2.3. Veri Kaynağı: Linux `/proc` Sanal Dosya Sistemi
+### 2.3. Veri Kaynağı: Linux /proc Sanal Dosya Sistemi
+
 Sistem verilerini toplamak için dış kütüphaneler yerine Linux çekirdeğinin (kernel) sunduğu `/proc` sistemi kullanılacaktır.
+
 * **Teknik Üstünlük:** `/proc/meminfo` gibi dosyalar diskte yer kaplamayan, doğrudan RAM'deki canlı veriyi yansıtan sanal dosyalardır. Bu dosyaları okuyarak sistemin o anki "gerçek röntgenini" en hızlı haliyle çekmiş olacağız.
+* **Çapraz Platform (Cross-Platform) Uyumluluğu:** `/proc` mimarisi yalnızca Linux çekirdeğine özgü olsa da, projenin Windows ve macOS gibi farklı işletim sistemlerinde de çalışabilmesi güvence altına alınmıştır. Bu uyumluluğu sağlamak için; C++ tabanlı arka uç (backend) kodları Windows ortamında **WSL2**, macOS ortamında ise **sanallaştırma (Docker/VM)** teknolojileri kullanılarak izole bir Linux çekirdeğinde çalıştırılacaktır. Python tabanlı kullanıcı arayüzü (frontend) ise işletim sisteminden bağımsız olarak çalışarak bu verileri ekrana yansıtacaktır.
+
 
 ### 2.4. Denetim Aracı: Valgrind (Memcheck)
 Yazılımın kalitesini garanti altına almak için **Valgrind** analiz aracı kullanılacaktır.
