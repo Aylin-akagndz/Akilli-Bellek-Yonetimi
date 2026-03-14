@@ -126,7 +126,7 @@ Projeden etkilenen veya projeyi kullanacak kişiler aşağıdaki şekilde belirl
 - Sistem bellek sızıntılarını tespit edebilmelidir.
 - Sistem analiz sonuçlarını kullanıcıya rapor halinde sunabilmelidir.
 - Sistem gereksiz bellek kullanımını tespit edebilmelidir.
-- Sistem geliştiricilere bellek optimizasyonu hakkında öneriler sunabilmelidir.
+- Sistem geliştircilere bellek kullanımını iyileştirmeye yönelik öneriler sunulabilir.
 
 ---
 
