@@ -7,7 +7,7 @@
 
 **1. Projenin Temel Hedefleri**
 
-* C++ ile geliştirilen yazılımlardaki bellek sızıntılarını (memory leak) ve hatalı bellek tahsislerini çalışma zamanında (runtime) tespit eden dinamik bir analiz aracı geliştirmek.
+* Elde edilen teknik verileri yapılandırılmış bir formatta işleyerek arayüz üzerinden kullanıcıya raporlamak.
 * Arka planda çalışan analiz motorunun ürettiği karmaşık terminal çıktılarını, Python tabanlı kullanıcı dostu bir grafik arayüz (GUI) ile görselleştirerek (grafikler, metrikler ve uyarılar halinde) raporlamak.
 
 **2. Proje Kapsamı**
