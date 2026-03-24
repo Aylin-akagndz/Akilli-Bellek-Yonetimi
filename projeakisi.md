@@ -135,7 +135,7 @@ Projeden etkilenen veya projeyi kullanacak kişiler aşağıdaki şekilde belirl
 
 ## Fonksiyonel Olmayan Gereksinimler
 
-- Sistem farklı işletim sistemlerinde çalışabilecek şekilde tasarlanmalıdır.
+- Sistem Linux ve Linux tabanlı ortamlar (WSL vb.) üzerinde çalışacak şekilde tasarlanmalıdır.
 - Sistem kullanıcı dostu olmalıdır.
 - Analiz işlemleri mümkün olduğunca hızlı gerçekleştirilmelidir.
 - Sistem büyük uygulamalarda da analiz yapabilecek kapasitede olmalıdır.
