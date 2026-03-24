@@ -100,13 +100,13 @@ Projeden etkilenen veya projeyi kullanacak kişiler aşağıdaki şekilde belirl
 - Sistem bellek sızıntılarını tespit edebilmelidir.
 - Sistem analiz sonuçlarını kullanıcıya rapor halinde sunabilmelidir.
 - Sistem gereksiz bellek kullanımını tespit edebilmelidir.
-- Sistem geliştiricilere bellek optimizasyonu hakkında öneriler sunabilmelidir.
+- Sistem geliştiricilere bellek kullanımıyla ilgili iyileştirme önerileri sunabilmelidir.
 
 ---
 
 ## Fonksiyonel Olmayan Gereksinimler
 
-- Sistem farklı işletim sistemlerinde çalışabilecek şekilde tasarlanmalıdır.
+- Sistem Linux ve Linux tabanlı ortamlar (WSL vb.) üzerinde çalışacak şekilde tasarlanmalıdır.
 - Sistem kullanıcı dostu olmalıdır.
 - Analiz işlemleri mümkün olduğunca hızlı gerçekleştirilmelidir.
 - Sistem büyük uygulamalarda da analiz yapabilecek kapasitede olmalıdır.
