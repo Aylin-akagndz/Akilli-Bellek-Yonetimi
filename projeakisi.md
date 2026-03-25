@@ -255,3 +255,71 @@ Yukarıdaki risklerin projeyi aksatmaması için aşağıdaki somut adımlar pla
 * **RSK-03 Çözümü (Arayüz Donması):** Arka planda analiz sürerken Python arayüzünün donmasını engellemek için, ön uçta Çoklu İş Parçacığı (**Multi-threading**) mimarisi kullanılacaktır.
 * **RSK-04 Çözümü (İşletim Sistemi):** C++ kodlarının dışarıda değil, tamamen izole bir **WSL2 veya Docker** ortamında çalıştırılması kuralı sıkı bir şekilde uygulanacaktır.
 
+
+
+# 🗄️ Görev: Veri Tabanı ve API Tasarımı
+
+**👤 Sorumlu:** Semanur Buhan
+**📅 İlgili Hafta:** Hafta 2
+
+Bu döküman, **RAM Kurtarıcıları** projemizin arka planda çalışan C++ motoru ile kullanıcı arayüzümüz (Python) arasındaki haberleşme mimarisini ve veri saklama stratejilerini içermektedir.
+
+---
+
+## 🛠️ 1. Kullanılacak Teknolojiler ve Mimari Kararlar
+
+Projemizin "sistem dostu ve hafif" olması temel amacımızdır. Bu nedenle ağır sunucu kurulumları gerektiren teknolojiler yerine, lokalde hızlı çalışan aşağıdaki araçlar tercih edilmiştir:
+
+* **Veri Tabanı: SQLite + JSON 🪶**
+    * **Neden?** SQLite, sunucu kurulumu gerektirmeyen, doğrudan proje klasörümüzde `.db` dosyası olarak çalışan çok hafif bir veri tabanıdır. 
+    * **JSON Kullanımı:** Valgrind'den gelen karmaşık ve binlerce satırlık bellek sızıntısı loglarını (dökümlerini) veri tabanına yazıp sistemi yavaşlatmak yerine, bu detaylı raporları `.json` dosyaları olarak kaydedeceğiz. SQLite veri tabanımızda sadece uygulamanın adını, tarihini ve bu JSON dosyasının *yolunu (path)* tutacağız.
+* **API (Haberleşme Köprüsü): FastAPI ⚡**
+    * **Neden?** C++ ile yazdığımız donanım seviyesindeki motor ile Python arayüzümüzün doğrudan ve güvenli bir şekilde konuşabilmesi için yerel (lokal) bir RESTful API kuracağız. FastAPI, Python'daki en hızlı API araçlarından biridir ve bize anında test edebileceğimiz otomatik bir dökümantasyon sayfası (Swagger UI) sunar.
+
+---
+
+## 📊 2. Veri Tabanı Şeması (SQLite)
+
+Veri tabanımızda şimdilik iki temel tablo bulunacaktır:
+
+### Tablo: `analiz_gecmisi`
+Geçmişte yapılan RAM analizlerinin özet bilgilerini tutar.
+* `id` (Integer, Primary Key): Kayıt numarası.
+* `uygulama_adi` (Text): Analiz edilen programın adı (Örn: chrome.exe).
+* `tarih` (Datetime): Analizin yapıldığı zaman.
+* `tespit_edilen_sizinti_mb` (Real): Bulunan gereksiz bellek tüketimi (MB cinsinden).
+* **`detay_json_yolu` (Text):** Valgrind'in ürettiği detaylı teknik raporun bulunduğu JSON dosyasının bilgisayardaki konumu.
+
+### Tablo: `ayarlar`
+Kullanıcının uygulama içi tercihlerini tutar.
+* `id` (Integer, Primary Key)
+* `otomatik_optimizasyon` (Boolean): Analiz sonrası temizlik otomatik yapılsın mı? (True/False)
+* `tema` (Text): Arayüz teması (Dark/Light).
+
+---
+
+## 🔌 3. API Dokümantasyonu (Endpoints)
+
+Python arayüzümüzün (Frontend), C++ motorumuzu (Backend) tetiklemek ve veri almak için kullanacağı "Gişeler" (Endpoint'ler) aşağıdadır:
+
+### 🚀 1. Analiz Başlatma
+* **İstek:** `POST /api/analiz/baslat`
+* **Açıklama:** Arayüzden gelen uygulama adını/PID'sini alır ve arka planda C++ (Valgrind) motorunu çalıştırır.
+* **Gönderilen Veri (Body):** `{"uygulama_adi": "chrome.exe"}`
+* **Dönen Cevap (Response):** `{"durum": "basarili", "mesaj": "Analiz basladi..."}`
+
+### 📂 2. Geçmiş Raporları Listeleme
+* **İstek:** `GET /api/raporlar`
+* **Açıklama:** SQLite veri tabanına bağlanarak geçmişte yapılan tüm analizlerin özet listesini arayüze gönderir.
+* **Dönen Cevap (Response):** Özet analiz listesi (JSON formatında liste).
+
+### 🔍 3. Detaylı Rapor Görüntüleme
+* **İstek:** `GET /api/raporlar/{rapor_id}`
+* **Açıklama:** Kullanıcı listeden bir rapora tıkladığında, ilgili id'ye ait JSON dosyasının içeriğini okur ve arayüze detaylı Valgrind dökümünü iletir.
+
+### 🧹 4. Bellek Optimizasyonu (Temizlik) Uygulama
+* **İstek:** `POST /api/optimizasyon/uygula`
+* **Açıklama:** Kullanıcı "Optimize Et" butonuna bastığında C++ tarafındaki bellek kurtarma rutinlerini tetikler.
+
+---
+*Not: Yukarıdaki tüm mimari kararlar ve teknoloji seçimleri, RAM Kurtarıcıları ekibi olarak yaptığımız  fikir alışverişleri sonucunda projemizin ihtiyaçlarına en uygun yapı olarak ortaklaşa belirlenmiştir. Bu mimari sayesinde kodlarımız birbirine girmeyecek, C++ ve Python tam bir uyum içinde çalışacaktır.*
