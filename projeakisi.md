@@ -211,7 +211,7 @@ Geliştirme ortamı yapılandırılması ve kurulumu tamamlandı.
 ---
 ## 2.1 Test Mimarisi, Simülasyon Senaryoları ve Sprint Planlaması
 
-**Sorumlu:** Mustafa Şahingöz (Scrum Master / Proje Yöneticisi)
+**Sorumlu:** Mustafa Şahingöz 
 
 **1. Simülasyon ve "Uygulama Sahası" Stratejisi**
 Geliştirilecek olan "Akıllı Bellek Yönetimi" aracının (Valgrind ve `/proc` motoru) test edilebilmesi ve yeteneklerinin kanıtlanabilmesi için dış bir projeye ihtiyaç duyulmadan kendi **"Simülasyon Ortamımız"** tasarlanmıştır. Bu kapsamda analiz motoruna "kobay" olarak verilmek üzere iki farklı C++ simülasyon uygulaması geliştirilecektir:
