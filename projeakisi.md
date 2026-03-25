@@ -211,21 +211,26 @@ Geliştirme ortamı yapılandırılması ve kurulumu tamamlandı.
 # 2. HAFTA ÇALIŞMALARI (12 Mart - 15 Mart 2026)
 ---
 
-## 2.1 Test Mimarisi, Simülasyon Senaryoları ve Sprint Planlaması
+## 2.2 Detaylı Risk Analizi ve Risk Yönetim Planı
 
-**Sorumlu:** Mustafa Şahingöz 
+**Sorumlu:** Mustafa Şahingöz (Proje Yöneticisi)
 
-**1. Simülasyon ve "Uygulama Sahası" Stratejisi**
-Geliştirilecek olan "Akıllı Bellek Yönetimi" aracının (Valgrind ve `/proc` motoru) test edilebilmesi ve yeteneklerinin kanıtlanabilmesi için dış bir projeye ihtiyaç duyulmadan kendi **"Simülasyon Ortamımız"** tasarlanmıştır. Bu kapsamda analiz motoruna "kobay" olarak verilmek üzere iki farklı C++ simülasyon uygulaması geliştirilecektir:
+**1. Risk Analizi ve Önceliklendirme Matrisi**
+Projenin 1. haftasında kapsam tanımlama aşamasında belirlenen temel risklerin derinlemesine analizi yapılmış ve her bir potansiyel kriz durumu için "Olasılık ve Etki" (1: Düşük, 2: Orta, 3: Yüksek) puanlaması yapılarak aşağıdaki matris oluşturulmuştur:
 
-* **Senaryo A (Sağlıklı Simülasyon):** Bellek tahsislerinin (`malloc`/`new`) ve iadelerinin (`free`/`delete`) kusursuz yapıldığı, bellek sızıntısı (memory leak) içermeyen ve stabil RAM tüketen referans uygulama.
-* **Senaryo B (Hatalı/Kanserli Simülasyon):** Sistemin hata yakalama kapasitesini test etmek amacıyla, bilinçli olarak tahsis edilmiş ancak serbest bırakılmamış (dangling pointer, memory leak) bellek blokları içeren, RAM tüketimi logaritmik olarak artan test uygulaması.
+| Risk Kodu | Risk Tanımı | Olasılık | Etki | Risk Skoru | Öncelik Seviyesi |
+| :--- | :--- | :---: | :---: | :---: | :--- |
+| **RSK-01** | Valgrind Analizinin Aşırı Performans Yükü (Overhead) Yaratması | 3 | 3 | 9 |  Kritik |
+| **RSK-02** | Karmaşık Terminal Verilerinin Yanlış Ayrıştırılması (Parsing Error) | 3 | 2 | 6 |  Yüksek |
+| **RSK-03** | C++ Arka Uç ve Python Ön Uç Arası İletişim Kopukluğu/Gecikmesi | 2 | 3 | 6 |  Yüksek |
+| **RSK-04** | Çapraz Platform (Windows/macOS) Uyumsuzluklarının Yaşanması | 1 | 3 | 3 |  Orta |
 
-*Sistemimizin başarısı; Senaryo B çalıştığında arka uçtaki C++ analiz motorunun sızıntıyı anında tespit edip, ön uçtaki Python arayüzünde "Kritik Bellek Uyarısı" verebilmesi ile ölçülecektir.*
+**2. Risk Azaltma ve Yönetim Eylem Planı (Mitigation Strategies)**
+Yukarıda tespit edilen risklerin projenin ilerleyişini durdurmasını engellemek amacıyla takım üyelerine aşağıdaki teknik eylem planları atanmıştır:
 
-**2. Veri Akışı ve İletişim Mimarisi Kararı**
-İzole bir Linux/WSL2 ortamında çalışan C++ analiz motorunun ürettiği verilerin, çapraz platform destekli Python arayüzüne (Frontend) aktarılabilmesi için yapılandırılmış bir veri formatı kullanılacaktır. Valgrind'den elde edilen karmaşık terminal çıktıları, arka uçta **JSON** formatına dönüştürülerek (Ayrıştırma/Parsing) Python arayüzüne iletilecek; böylece veri kaybı ve senkronizasyon sorunları önlenecektir.
-
-
+* **RSK-01 İçin Çözüm Planı (Performans):** Dinamik analiz araçlarının hedef uygulamayı yavaşlatması kaçınılmazdır. Bu yükü hafifletmek için sistem motorumuz tüm işletim sistemini değil, **sadece hedeflenen (simüle edilen) uygulamanın işlem kimliğini (PID)** izleyecek şekilde kısıtlanacaktır.
+* **RSK-02 İçin Çözüm Planı (Veri Ayrıştırma):** Valgrind'in standart dışı metin (plain text) çıktıları doğrudan Python arayüzüne beslenmeyecektir. Veri kaybını önlemek için arka uçta (C++) bu veriler evrensel **JSON formatına** dönüştürülecek, Python sadece bu yapılandırılmış JSON dosyasını okuyacaktır.
+* **RSK-03 İçin Çözüm Planı (İletişim ve Arayüz Donması):** Arka uç veri toplarken Python tabanlı kullanıcı arayüzünün (GUI) donmasını engellemek için, Python tarafında asenkron mimari veya **Multi-threading (Çoklu İş Parçacığı)** kullanılacaktır. Böylece arka planda analiz sürerken arayüz akıcı kalmaya devam edecektir.
+* **RSK-04 İçin Çözüm Planı (İşletim Sistemi Uyumu):** İlk hafta alınan karar doğrultusunda, C++ kodlarının dışarıda değil, kesinlikle izole bir **WSL2 veya Docker** konteyneri içinde çalıştırılması kuralından taviz verilmeyecektir. Bu sayede "Benim bilgisayarımda çalışıyor ama sende çalışmıyor" krizleri başlamadan bitirilecektir.
 
 
