@@ -231,6 +231,7 @@ Geliştirilecek olan "Akıllı Bellek Yönetimi" aracının (Valgrind ve `/proc`
 * **Semanur (Altyapı):** Kurulan WSL2 ortamında yazılan simülasyon kodlarının derlenmesi (G++) ve izole ortamda çalıştırılabilirliğini denetlemek.
 * **Sümeyra (Gereksinim/Arayüz):** Elde edilecek JSON verilerinin Python tarafında hangi grafik türleriyle (Örn: Zaman-RAM tüketim grafiği) gösterileceğinin taslak UI/UX gereksinimlerini belirlemek.
 
+
 ## 2.2 Detaylı Risk Analizi ve Risk Yönetim Planı
 
 **Sorumlu:** Mustafa Şahingöz 
