@@ -326,12 +326,10 @@ Python arayüzümüzün (Frontend), C++ motorumuzu (Backend) tetiklemek ve veri 
 
 # Proje Akışı
 
-## Hafta 1
+## Hafta 2
 
 ### Mustafa Şahingöz
 Detaylı Risk Analizi ve Yönetim Planı Oluşturuldu.
-
-## Hafta 1
 
 ### Semanur Buhan
 Veri Tabanı ve API Tasarımı yapıldı.
