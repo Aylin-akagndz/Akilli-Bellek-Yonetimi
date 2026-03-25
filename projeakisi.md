@@ -233,7 +233,7 @@ Geliştirilecek olan "Akıllı Bellek Yönetimi" aracının (Valgrind ve `/proc`
 
 ## 2.2 Detaylı Risk Analizi ve Risk Yönetim Planı
 
-**Sorumlu:** Mustafa Şahingöz (Proje Yöneticisi)
+**Sorumlu:** Mustafa Şahingöz 
 
 **1. Risk Analizi ve Önceliklendirme Matrisi**
 Projenin ilk haftasında belirlenen riskler analiz edilmiş; Olasılık ve Etki derecelerine göre (1: Düşük, 2: Orta, 3: Yüksek) aşağıdaki tablo oluşturulmuştur:
