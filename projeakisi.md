@@ -257,7 +257,7 @@ Yukarıdaki risklerin projeyi aksatmaması için aşağıdaki somut adımlar pla
 
 
 
-# 🗄️ Görev: Veri Tabanı ve API Tasarımı
+# 2.3 🗄️ Görev: Veri Tabanı ve API Tasarımı
 
 **👤 Sorumlu:** Semanur Buhan
 **📅 İlgili Hafta:** Hafta 2
