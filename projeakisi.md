@@ -207,3 +207,29 @@ Paydaş analizi ve gereksinimler belirlendi.
 Geliştirme ortamı yapılandırılması ve kurulumu tamamlandı.
 
 
+
+# 2. HAFTA ÇALIŞMALARI (12 Mart - 15 Mart 2026)
+---
+
+## 2.2 Detaylı Risk Analizi ve Risk Yönetim Planı
+
+**Sorumlu:** Mustafa Şahingöz (Proje Yöneticisi)
+
+**1. Risk Analizi ve Önceliklendirme Matrisi**
+Projenin ilk haftasında belirlenen riskler analiz edilmiş; Olasılık ve Etki derecelerine göre (1: Düşük, 2: Orta, 3: Yüksek) aşağıdaki tablo oluşturulmuştur:
+
+| Risk Kodu | Risk Tanımı | Olasılık | Etki | Risk Skoru | Öncelik |
+| :--- | :--- | :---: | :---: | :---: | :--- |
+| **RSK-01** | Valgrind Analizinin Sistemi Yavaşlatması (Performans Yükü) | 3 | 3 | 9 |  Kritik |
+| **RSK-02** | Terminal Verilerinin Yanlış Ayrıştırılması (Parsing Hatası) | 3 | 2 | 6 |  Yüksek |
+| **RSK-03** | C++ Arka Uç ve Python Ön Uç Arasında İletişim Gecikmesi | 2 | 3 | 6 |  Yüksek |
+| **RSK-04** | Çapraz Platform (Windows/macOS) Uyumsuzlukları | 1 | 3 | 3 |  Orta |
+
+**2. Risk Çözüm ve Yönetim Planı**
+Yukarıdaki risklerin projeyi aksatmaması için aşağıdaki somut adımlar planlanmıştır:
+
+* **RSK-01 Çözümü (Performans):** Analiz motorumuz tüm sistemi değil, sadece test edilen uygulamanın işlem kimliğini (PID) izleyecek şekilde kısıtlanacaktır.
+* **RSK-02 Çözümü (Veri Hatası):** C++ arka ucu, karmaşık metin çıktılarını standart **JSON** formatına çevirecek; Python sadece bu kayıpsız JSON dosyasını okuyacaktır.
+* **RSK-03 Çözümü (Arayüz Donması):** Arka planda analiz sürerken Python arayüzünün donmasını engellemek için, ön uçta Çoklu İş Parçacığı (**Multi-threading**) mimarisi kullanılacaktır.
+* **RSK-04 Çözümü (İşletim Sistemi):** C++ kodlarının dışarıda değil, tamamen izole bir **WSL2 veya Docker** ortamında çalıştırılması kuralı sıkı bir şekilde uygulanacaktır.
+
