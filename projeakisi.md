@@ -370,7 +370,57 @@ Geçtiğimiz hafta projemizin önündeki olası riskleri ve başımıza açabile
 Bu tasarladığımız önlemlerin gerçekten işe yarayıp yaramadığını  kodlama testimizde göreceğiz.
 
 
+## 3.2 👩‍💻 Sümeyra Adıyaman – API Endpoint Spesifikasyonları
 
+### Görev Tanımı
+Bu hafta kapsamında, Akıllı Bellek Yönetimi Uygulaması için API endpoint spesifikasyonları oluşturulmuş ve FastAPI ile çalışan bir mock prototip geliştirilmiştir. Amaç, Python tabanlı kullanıcı arayüzü ile C++ analiz motoru arasındaki iletişimi standart ve modüler hale getirmektir.
+
+---
+
+## API Tasarım Amacı
+API tasarımı, sistem bileşenleri arasında veri alışverişini düzenlemek amacıyla hazırlanmıştır. Kullanıcıdan gelen isteklerin analiz motoruna iletilmesi ve sonuçların kullanıcıya aktarılması hedeflenmiştir.
+
+---
+
+## Temel API Endpointleri
+- `POST /api/v1/analiz/baslat` → analiz başlatır, oturum_id döner
+- `GET /api/v1/analiz/durum/{oturum_id}` → analiz durumunu ve anlık RAM verisini gösterir
+- `POST /api/v1/analiz/durdur/{oturum_id}` → analizi durdurur ve raporu kaydeder
+- `GET /api/v1/raporlar` → geçmiş analizleri listeler
+- `GET /api/v1/raporlar/{rapor_id}` → detaylı rapor getirir
+- `GET /api/v1/canli/ram-anlık` → anlık RAM verisi verir
+- `GET /api/v1/sistem/saglik` → sistemin çalışma durumunu döner
+
+---
+
+## Mock Prototip
+Tasarımı somutlaştırmak amacıyla FastAPI ile çalışan bir mock prototip geliştirilmiştir. Prototip şu an örnek verilerle çalışmaktadır; ilerleyen haftalarda C++ motoruna bağlanacaktır.
+
+**Prototip dosyası:** `src/api/main.py`
+
+**Çalıştırma:**
+```bash
+pip install fastapi uvicorn
+uvicorn main:app --reload
+```
+
+**Test arayüzü:** `http://127.0.0.1:8000/docs`
+
+---
+
+## Sonuç
+Hazırlanan API tasarımı ve mock prototip sayesinde sistem bileşenleri arasındaki iletişim somut hale getirilmiştir. Endpointler gerçekten çalışmakta, istek atılabilmekte ve cevap dönmektedir.
+
+
+# Proje Akışı
+
+## Hafta 3
+
+### Mustafa Şahingöz
+Risk Yönetim Planı Uygulama Tasarımı yapıldı.
+
+### Sümeyra Adıyaman
+API Endpoint Spesifikasyonları oluşturuldu ve mock prototip geliştirildi.
 
 
 
