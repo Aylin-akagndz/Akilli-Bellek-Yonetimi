@@ -460,6 +460,6 @@ Uygulama arayüzü için prototip UX wireframe tasarımı yapıldı.
 
 
 
-# 1. HAFTA ÇALIŞMALARI (21 Nisan  - 28 Nisan 2026)
+# 4. HAFTA ÇALIŞMALARI (21 Nisan  - 28 Nisan 2026)
 ---
 
