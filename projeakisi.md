@@ -458,3 +458,8 @@ API Endpoint Spesifikasyonları oluşturuldu ve mock prototip geliştirildi.
 ### Semanur Buhan
 Uygulama arayüzü için prototip UX wireframe tasarımı yapıldı.
 
+
+
+# 1. HAFTA ÇALIŞMALARI (21 Nisan  - 28 Nisan 2026)
+---
+
