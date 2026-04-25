@@ -501,6 +501,7 @@ Modüler bir yapı oluşturularak VeriHavuzu.h ve VeriHavuzu.cpp dosyaları sist
 
 Hazırlanan yapıların stabil çalışıp çalışmadığı kontrol edildi ve backend klasörüne başarılı şekilde pushlandı.
 
+---
 ## 4.3 Mustafa Şahingöz - Bellek Sızıntısı Analizi ve Düzeltilmesi
 ---
 ##  Görev Özeti
