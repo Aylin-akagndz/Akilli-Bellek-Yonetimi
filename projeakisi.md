@@ -547,5 +547,5 @@ Veri yapıları optimize edildi ve C++ simülasyon kodları yazıldı.
 * `arka uç` klasörüne `VeriHavuzu.h` ve `VeriHavuzu.cpp` dosyaları modüler yapıda eklendi.
 
 ### Musatfa Şahingöz
-Uygulamadaki bellek sızıntılarını tespit edildi ve bu sızıntıları gidermek için gerekli düzeltmeleri yapıldı. Performans testleri ile doğrulandı.
+Uygulamadaki bellek sızıntılarını tespit edildi ve bu sızıntıları gidermek için gerekli düzeltmeler yapıldı. Performans testleri ile doğrulandı.
 
