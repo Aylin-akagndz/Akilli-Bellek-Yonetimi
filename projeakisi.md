@@ -503,7 +503,7 @@ Hazırlanan yapıların stabil çalışıp çalışmadığı kontrol edildi ve b
 
 ---
 ## 4.3 Mustafa Şahingöz - Bellek Sızıntısı Analizi ve Düzeltilmesi
----
+
 ##  Görev Özeti
 Bu hafta, projenin temelini oluşturan "Bellek Havuzu" motoru ile test senaryolarının entegrasyonu gerçekleştirilmiş ve sistemdeki bellek sızıntıları (memory leaks) analiz edilerek tamamen giderilmiştir.
 
