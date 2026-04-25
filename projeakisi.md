@@ -501,9 +501,7 @@ Modüler bir yapı oluşturularak VeriHavuzu.h ve VeriHavuzu.cpp dosyaları sist
 
 Hazırlanan yapıların stabil çalışıp çalışmadığı kontrol edildi ve backend klasörüne başarılı şekilde pushlandı.
 
-# Bellek Sızıntısı Analizi ve Düzeltilmesi
-
-**Hazırlayan:** Musatafa Şahingöz
+# 4.3 Mustafa Şahingöz - Bellek Sızıntısı Analizi ve Düzeltilmesi
 
 ##  Görev Özeti
 Bu hafta, projenin temelini oluşturan "Bellek Havuzu" motoru ile test senaryolarının entegrasyonu gerçekleştirilmiş ve sistemdeki bellek sızıntıları (memory leaks) analiz edilerek tamamen giderilmiştir.
@@ -546,4 +544,7 @@ Veri yapıları optimize edildi ve C++ simülasyon kodları yazıldı.
 * Uygulama genelinde gereksiz nesne oluşumunu engellemek amacıyla **Object Pool (Nesne Havuzu)** tasarım deseni backend mimarisine entegre edildi.
 * RAII prensibi kullanılarak bellek sızıntıları (memory leak) önlendi ve sistem yükü optimize edildi.
 * `arka uç` klasörüne `VeriHavuzu.h` ve `VeriHavuzu.cpp` dosyaları modüler yapıda eklendi.
+
+### Musatfa Şahingöz
+Uygulamadaki bellek sızıntılarını tespit edildi ve bu sızıntıları gidermek için gerekli düzeltmeleri yapıldı. Performans testleri ile doğrulandı.
 
