@@ -517,6 +517,8 @@ Bu hafta, projenin temelini oluşturan "Bellek Havuzu" motoru ile test senaryola
 <img width="345" height="89" alt="Ekran Resmi 2026-04-25 17 29 21" src="https://github.com/user-attachments/assets/fe152cdc-6570-466a-9c15-92999fdd5cea" />
 
 
+
+
 4. **Teknik Onarım:** - `new[]` ile açılan diziler `delete[]` ile serbest bırakıldı.
    - Döngü içerisinde sahipsiz kalan nesneler için `delete` komutları eklendi.
    - *Dangling pointer* (sarkan işaretçi) riskine karşı `nullptr` atamaları yapıldı.
