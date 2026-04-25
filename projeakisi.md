@@ -462,6 +462,38 @@ Uygulama arayüzü için prototip UX wireframe tasarımı yapıldı.
 
 # 4. HAFTA ÇALIŞMALARI (21 Nisan  - 28 Nisan 2026)
 ---
+## 4.5  Aylin Akagündüz – Büyük Boyutlu Verilerin İşlenmesinde Bellek Optimizasyonu
+
+### Görev Tanımı
+
+Bu hafta kapsamında, büyük boyutlu verilerin (resim buffer'ları ve video akışları) işlenmesi sırasında bellek kullanımının nasıl optimize edileceği araştırılmış ve projemize uygun teknikler belirlenmiştir.
+
+---
+
+### Uygulanan Optimizasyon Teknikleri
+
+**1. Sıkıştırma (zlib / DEFLATE)**
+Valgrind çıktıları ve JSON raporları diske yazılmadan önce sıkıştırılır. Ham boyutu %40–65 oranında azaltır, kayıpsız çalışır.
+
+**2. Parçalı İşleme (Stream Processing)**
+Büyük veri tüm buffer'a yüklenmek yerine parça parça okunur. Bellekte aynı anda yalnızca tek bir parça bulunduğundan RAM kullanımı sabit kalır.
+
+**3. Bellek Havuzu (Memory Pool)**
+Yusuf'un bu hafta teslim ettiği `VeriHavuzu` modülü büyük veri nesneleri için de kullanılacak; sürekli `malloc/free` döngüsünden kaçınılır.
+
+**4. Tembel Yükleme (Lazy Loading)**
+Geçmiş raporlar listesinde yalnızca özet bilgi tutulur; tam Valgrind verisi yalnızca kullanıcı raporu açtığında yüklenir. Semanur'un `detay_json_yolu` mimarisiyle uyumludur.
+
+---
+
+### Sonuç
+
+Belirlenen dört teknik birbirini tamamlayıcı niteliktedir ve mevcut mimariyi bozmadan projeye entegre edilecektir. Bu strateji aynı zamanda Hafta 2'de tanımlanan RSK-01 ve RSK-02 risklerine karşı ek güvence sağlamaktadır.
+
+
+### Aylin Akagündüz
+Büyük boyutlu verilerin bellek optimizasyonu araştırıldı, uygulama stratejisi belirlendi.
+
 
 ## 4.1 👩‍💻 Sümeyra Adıyaman – Veri Yapılarının Optimizasyonu
 
@@ -532,7 +564,34 @@ Bu hafta, projenin temelini oluşturan "Bellek Havuzu" motoru ile test senaryola
 
 **Durum:** ✅ Tamamlandı
 
+---
 
+## 4.4 Semanur Buhan - Bellek Yönetimi Araçları Entegrasyonu ve Teknik Raporlama
+
+##  Görev Özeti
+Proje genelinde bellek kullanımını izlemek, analiz etmek ve elde edilen verileri raporlanabilir formata getirmek amacıyla Valgrind entegrasyonu sağlandı.
+
+## Yapılan Çalışmalar
+
+1. **Otomasyon Betiği (Integration):** C++ test senaryolarını (`senaryo_b_duzeltilmis.cpp` vb.) otomatik olarak derleyen ve Valgrind üzerinden çalıştıran `valgrind_analiz.sh` betiği yazıldı. Bu sayede manuel test süreçleri tek komutla çalışabilir hale getirildi.
+2. **Raporlama Standardizasyonu:** Valgrind analiz sonuçlarının standart bir `valgrind_raporu.log` dosyasına yönlendirilmesi sağlandı. Bu altyapı, ileride tasarladığımız arayüzün (UI) veri okuyacağı ana motoru oluşturmaktadır.
+3. **Sistem Doğrulaması:** Ekip arkadaşlarımın Nesne Havuzu (Object Pool) ve RAII kullanarak sunduğu çözümler, yazdığım bu otomasyon motoruyla test edildi.
+
+**🔍 Teknik Analiz Raporu (Valgrind Results):**
+Analiz edilen dosya: `tests/senaryo_b_duzeltilmis.cpp`
+
+| Kategori | Sonuç |
+| :--- | :--- |
+| **Hata Sayısı (Errors)** | 0 (Sıfır Hata) |
+| **Kesin Kayıp (Definitely Lost)** | 0 bytes in 0 blocks |
+| **Toplam Bellek Kullanımı** | All heap blocks were freed (Tüm bellek geri kazanıldı) |
+| **Durum** | ✅ Güvenli / Stabil |
+
+## Sonuç
+ - Valgrind entegrasyonu başarıyla tamamlandı.
+ - Yapılan testler sonucunda sistemin bellek sızıntılarından tamamen arındırıldığı teknik olarak raporlanmıştır.
+
+**Durum:** ✅ Tamamlandı.
 
 ---
 
@@ -551,3 +610,9 @@ Veri yapıları optimize edildi ve C++ simülasyon kodları yazıldı.
 ### Mustafa Şahingöz
 Uygulamadaki bellek sızıntılarını tespit edildi ve bu sızıntıları gidermek için gerekli düzeltmeler yapıldı. Performans testleri ile doğrulandı.
 
+### Semanur Buhan
+Proje genelinde bellek kullanımını otomatize etmek ve analiz sonuçlarını standart bir formata dönüştürmek amacıyla Valgrind entegrasyonu sağlandı.
+
+* Test süreçlerini hızlandırmak için C++ senaryolarını otomatik derleyip test eden `valgrind_analiz.sh` scripti yazıldı.
+* Analiz çıktıları için `.log` tabanlı standart bir raporlama altyapısı kuruldu.
+* Geliştirilen otomasyon motoru üzerinden yapılan son doğrulamalarda, sistemde **0 bayt sızıntı** ve **0 hata** olduğu teknik olarak raporlanarak projenin bellek güvenliği onaylandı.
