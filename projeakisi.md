@@ -616,3 +616,8 @@ Proje genelinde bellek kullanımını otomatize etmek ve analiz sonuçlarını s
 
 ### Aylin Akagündüz
 Büyük boyutlu verilerin bellek optimizasyonu araştırıldı, uygulama stratejisi belirlendi.
+
+
+
+# 5. HAFTA ÇALIŞMALARI (2 Mayıs  - 9 Mayıs 2026)
+---
