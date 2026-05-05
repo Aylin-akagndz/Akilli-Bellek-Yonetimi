@@ -621,3 +621,42 @@ Büyük boyutlu verilerin bellek optimizasyonu araştırıldı, uygulama stratej
 
 # 5. HAFTA ÇALIŞMALARI (2 Mayıs  - 9 Mayıs 2026)
 ---
+
+## 5.1 👩‍💻 Sümeyra Adıyaman – Profilleme Aracı Entegrasyonu
+
+### Görev Tanımı
+Bu hafta kapsamında, FastAPI tabanlı API'ye Python'ın yerleşik `tracemalloc` kütüphanesi entegre edilerek gerçek zamanlı bellek profilleme özelliği kazandırılmıştır.
+
+---
+
+### Yapılan Çalışmalar
+
+**1. tracemalloc Entegrasyonu (`src/api/main.py`)**
+- API başladığında `tracemalloc.start()` ile profilleme otomatik olarak devreye giriyor
+- Anlık ve zirve bellek kullanımı sürekli takip ediliyor
+
+**2. Yeni Endpoint: `GET /api/v1/sistem/profil`**
+- Anlık bellek kullanımı (byte ve KB cinsinden)
+- Zirve bellek kullanımı (byte ve KB cinsinden)
+- En çok bellek tüketen 5 kod noktası (dosya adı, satır numarası, boyut)
+
+**3. Test Sonucu**
+- Anlık bellek: ~2.497 KB
+- Zirve bellek: ~2.607 KB
+- En çok bellek tüketen nokta: Python'un kendi import mekanizması (normal)
+
+---
+
+### Sonuç
+Profilleme aracı başarıyla entegre edilmiştir. API çalışırken bellek kullanımı anlık olarak izlenebilmekte ve raporlanabilmektedir.
+
+**Güncellenen dosya:** `src/api/main.py`
+
+---
+
+# Proje Akışı
+
+## Hafta 5
+
+### Sümeyra Adıyaman
+Profilleme aracı (`tracemalloc`) API'ye entegre edildi. Bellek kullanımını anlık raporlayan `GET /api/v1/sistem/profil` endpoint'i eklendi.
