@@ -482,7 +482,115 @@ Bu hafta kapsamında kullanılan veri yapıları bellek kullanımı açısından
 - `api/senaryo_a.py` → Sağlıklı bellek yönetimi, Valgrind'de 0 hata bekleniyor
 - `api/senaryo_b.py` → Bilinçli bellek sızıntısı, ~840 byte sızıntı bekleniyor
 
+
+4.2 👨‍💻 Yusuf Tuğra Deveci – Nesne Havuzu ve Bellek Optimizasyonu
+Görev Tanımı
+Bu hafta kapsamında, backend mimarisinde nesne yönetimini optimize etmek amacıyla Object Pool (Nesne Havuzu) tasarım deseni entegre edilmiş ve C++ tarafında bellek güvenliğini sağlamak için RAII prensipleri uygulanmıştır.
+
+Yapılan Çalışmalar
+
+1.Nesne Havuzu Entegrasyonu (backend/VeriHavuzu.cpp)
+Gereksiz nesne oluşumunu (object instantiation) engellemek için geri dönüşümlü bir havuz yapısı kuruldu.
+Sistem yükü optimize edilerek işlemci maliyeti düşürüldü.
+
+2.Bellek Güvenliği ve RAII
+Manuel bellek yönetiminden kaynaklanabilecek memory leak (bellek sızıntısı) riskleri RAII prensibiyle ortadan kaldırıldı.
+Modüler bir yapı oluşturularak VeriHavuzu.h ve VeriHavuzu.cpp dosyaları sisteme eklendi.
+
+3.C++ Simülasyon Testleri
+
+Hazırlanan yapıların stabil çalışıp çalışmadığı kontrol edildi ve backend klasörüne başarılı şekilde pushlandı.
+
 ---
+## 4.3 Mustafa Şahingöz - Bellek Sızıntısı Analizi ve Düzeltilmesi
+
+##  Görev Özeti
+Bu hafta, projenin temelini oluşturan "Bellek Havuzu" motoru ile test senaryolarının entegrasyonu gerçekleştirilmiş ve sistemdeki bellek sızıntıları (memory leaks) analiz edilerek tamamen giderilmiştir.
+
+## Gerçekleştirilen İşlemler
+1. **Kod Entegrasyonu:** Yusuf'un geliştirdiği `VeriHavuzu` motoru ile Sümeyra'nın hazırladığı test senaryoları birleştirildi.
+2. <img width="544" height="55" alt="Ekran Resmi 2026-04-25 17 49 55" src="https://github.com/user-attachments/assets/16193443-97b0-49d6-944c-2ca4376f8acf" />
+
+3. **Sızıntı Analizi:** Senaryo-B üzerinde yapılan testlerde ~840 byte miktarında kritik bellek sızıntısı tespit edildi.
+4. <img width="345" height="89" alt="Ekran Resmi 2026-04-25 17 29 21" src="https://github.com/user-attachments/assets/5ec03f89-caa0-48c2-b5f5-0ef6d5d96b75" />
+
+
+
+5. **Teknik Onarım:** - `new[]` ile açılan diziler `delete[]` ile serbest bırakıldı.
+6. <img width="925" height="394" alt="Ekran Resmi 2026-04-25 18 05 47" src="https://github.com/user-attachments/assets/ab2a8eaf-369b-4897-9afb-19b6fddb9af5" />
+
+   - Döngü içerisinde sahipsiz kalan nesneler için `delete` komutları eklendi.
+   - *Dangling pointer* (sarkan işaretçi) riskine karşı `nullptr` atamaları yapıldı.
+7. **Git Yönetimi:** Uzak depodaki (remote) değişiklikler yerel kodla birleştirildi (Merge), çakışmalar çözüldü ve stabil sürüm GitHub'a fırlatıldı.
+8. **Düzeltme:** Senaryo B kısmındaki sızıntılar tespil edildi ve düzeltilmiş hali yüklendi.
+
+## Sonuç
+- **Hata Sayısı:** 0
+- **Bellek Durumu:** "All heap blocks were freed" (Tüm bellek geri kazanıldı).
+- **Dosya Yapısı:** Orijinal testlere dokunulmadan `senaryo_b_duzeltilmis.cpp` adıyla optimize edilmiş sürüm sisteme eklendi.
+
+
+**Durum:** ✅ Tamamlandı
+
+---
+
+## 4.4 Semanur Buhan - Bellek Yönetimi Araçları Entegrasyonu ve Teknik Raporlama
+
+##  Görev Özeti
+Proje genelinde bellek kullanımını izlemek, analiz etmek ve elde edilen verileri raporlanabilir formata getirmek amacıyla Valgrind entegrasyonu sağlandı.
+
+## Yapılan Çalışmalar
+
+1. **Otomasyon Betiği (Integration):** C++ test senaryolarını (`senaryo_b_duzeltilmis.cpp` vb.) otomatik olarak derleyen ve Valgrind üzerinden çalıştıran `valgrind_analiz.sh` betiği yazıldı. Bu sayede manuel test süreçleri tek komutla çalışabilir hale getirildi.
+2. **Raporlama Standardizasyonu:** Valgrind analiz sonuçlarının standart bir `valgrind_raporu.log` dosyasına yönlendirilmesi sağlandı. Bu altyapı, ileride tasarladığımız arayüzün (UI) veri okuyacağı ana motoru oluşturmaktadır.
+3. **Sistem Doğrulaması:** Ekip arkadaşlarımın Nesne Havuzu (Object Pool) ve RAII kullanarak sunduğu çözümler, yazdığım bu otomasyon motoruyla test edildi.
+
+**🔍 Teknik Analiz Raporu (Valgrind Results):**
+Analiz edilen dosya: `tests/senaryo_b_duzeltilmis.cpp`
+
+| Kategori | Sonuç |
+| :--- | :--- |
+| **Hata Sayısı (Errors)** | 0 (Sıfır Hata) |
+| **Kesin Kayıp (Definitely Lost)** | 0 bytes in 0 blocks |
+| **Toplam Bellek Kullanımı** | All heap blocks were freed (Tüm bellek geri kazanıldı) |
+| **Durum** | ✅ Güvenli / Stabil |
+
+## Sonuç
+ - Valgrind entegrasyonu başarıyla tamamlandı.
+ - Yapılan testler sonucunda sistemin bellek sızıntılarından tamamen arındırıldığı teknik olarak raporlanmıştır.
+
+**Durum:** ✅ Tamamlandı.
+
+---
+
+## 4.5  Aylin Akagündüz – Büyük Boyutlu Verilerin İşlenmesinde Bellek Optimizasyonu
+
+### Görev Tanımı
+
+Bu hafta kapsamında, büyük boyutlu verilerin (resim buffer'ları ve video akışları) işlenmesi sırasında bellek kullanımının nasıl optimize edileceği araştırılmış ve projemize uygun teknikler belirlenmiştir.
+
+---
+
+### Uygulanan Optimizasyon Teknikleri
+
+**1. Sıkıştırma (zlib / DEFLATE)**
+Valgrind çıktıları ve JSON raporları diske yazılmadan önce sıkıştırılır. Ham boyutu %40–65 oranında azaltır, kayıpsız çalışır.
+
+**2. Parçalı İşleme (Stream Processing)**
+Büyük veri tüm buffer'a yüklenmek yerine parça parça okunur. Bellekte aynı anda yalnızca tek bir parça bulunduğundan RAM kullanımı sabit kalır.
+
+**3. Bellek Havuzu (Memory Pool)**
+Yusuf'un bu hafta teslim ettiği `VeriHavuzu` modülü büyük veri nesneleri için de kullanılacak; sürekli `malloc/free` döngüsünden kaçınılır.
+
+**4. Tembel Yükleme (Lazy Loading)**
+Geçmiş raporlar listesinde yalnızca özet bilgi tutulur; tam Valgrind verisi yalnızca kullanıcı raporu açtığında yüklenir. Semanur'un `detay_json_yolu` mimarisiyle uyumludur.
+
+---
+
+### Sonuç
+
+Belirlenen dört teknik birbirini tamamlayıcı niteliktedir ve mevcut mimariyi bozmadan projeye entegre edilecektir. Bu strateji aynı zamanda Hafta 2'de tanımlanan RSK-01 ve RSK-02 risklerine karşı ek güvence sağlamaktadır.
+
 
 # Proje Akışı
 
@@ -490,3 +598,108 @@ Bu hafta kapsamında kullanılan veri yapıları bellek kullanımı açısından
 
 ### Sümeyra Adıyaman
 Veri yapıları optimize edildi ve C++ simülasyon kodları yazıldı.
+
+**Yusuf Tuğra Deveci**
+* Uygulama genelinde gereksiz nesne oluşumunu engellemek amacıyla **Object Pool (Nesne Havuzu)** tasarım deseni backend mimarisine entegre edildi.
+* RAII prensibi kullanılarak bellek sızıntıları (memory leak) önlendi ve sistem yükü optimize edildi.
+* `arka uç` klasörüne `VeriHavuzu.h` ve `VeriHavuzu.cpp` dosyaları modüler yapıda eklendi.
+
+### Mustafa Şahingöz
+Uygulamadaki bellek sızıntılarını tespit edildi ve bu sızıntıları gidermek için gerekli düzeltmeler yapıldı. Performans testleri ile doğrulandı.
+
+### Semanur Buhan
+Proje genelinde bellek kullanımını otomatize etmek ve analiz sonuçlarını standart bir formata dönüştürmek amacıyla Valgrind entegrasyonu sağlandı.
+
+* Test süreçlerini hızlandırmak için C++ senaryolarını otomatik derleyip test eden `valgrind_analiz.sh` scripti yazıldı.
+* Analiz çıktıları için `.log` tabanlı standart bir raporlama altyapısı kuruldu.
+* Geliştirilen otomasyon motoru üzerinden yapılan son doğrulamalarda, sistemde **0 bayt sızıntı** ve **0 hata** olduğu teknik olarak raporlanarak projenin bellek güvenliği onaylandı.
+
+### Aylin Akagündüz
+Büyük boyutlu verilerin bellek optimizasyonu araştırıldı, uygulama stratejisi belirlendi.
+
+
+
+# 5. HAFTA ÇALIŞMALARI (2 Mayıs  - 9 Mayıs 2026)
+---
+
+## 5.1 👩‍💻 Sümeyra Adıyaman – Profilleme Aracı Entegrasyonu
+
+### Görev Tanımı
+Bu hafta kapsamında, FastAPI tabanlı API'ye Python'ın yerleşik `tracemalloc` kütüphanesi entegre edilerek gerçek zamanlı bellek profilleme özelliği kazandırılmıştır.
+
+---
+
+### Yapılan Çalışmalar
+
+**1. tracemalloc Entegrasyonu (`src/api/main.py`)**
+- API başladığında `tracemalloc.start()` ile profilleme otomatik olarak devreye giriyor
+- Anlık ve zirve bellek kullanımı sürekli takip ediliyor
+
+**2. Yeni Endpoint: `GET /api/v1/sistem/profil`**
+- Anlık bellek kullanımı (byte ve KB cinsinden)
+- Zirve bellek kullanımı (byte ve KB cinsinden)
+- En çok bellek tüketen 5 kod noktası (dosya adı, satır numarası, boyut)
+
+**3. Test Sonucu**
+- Anlık bellek: ~2.497 KB
+- Zirve bellek: ~2.607 KB
+- En çok bellek tüketen nokta: Python'un kendi import mekanizması (normal)
+
+---
+
+### Sonuç
+Profilleme aracı başarıyla entegre edilmiştir. API çalışırken bellek kullanımı anlık olarak izlenebilmekte ve raporlanabilmektedir.
+
+**Güncellenen dosya:** `src/api/main.py`
+
+---
+
+# Proje Akışı
+
+## Hafta 5
+
+### Sümeyra Adıyaman
+Profilleme aracı (`tracemalloc`) API'ye entegre edildi. Bellek kullanımını anlık raporlayan `GET /api/v1/sistem/profil` endpoint'i eklendi.
+
+
+
+# 6. HAFTA ÇALIŞMALARI (2 Mayıs - 9 Mayıs 2026)
+---
+
+## 6.1 👩‍💻 Sümeyra Adıyaman – Performans Testleri ve Optimizasyon
+
+### Görev Tanımı
+Bu hafta kapsamında API'nin performansı test edilmiş ve optimizasyon çalışmaları yapılmıştır.
+
+---
+
+### Performans Testi Sonuçları (`tests/performans_testi.py`)
+
+| Endpoint | Toplam İstek | Başarılı | Ortalama Süre | En Fazla Süre |
+| :--- | :---: | :---: | :---: | :---: |
+| GET /api/v1/sistem/saglik | 50 | 50 | 21.08 ms | 39.35 ms |
+| GET /api/v1/sistem/bellek | 50 | 50 | 23.09 ms | 47.96 ms |
+| GET /api/v1/sistem/profil | 50 | 50 | 95.31 ms | 242.84 ms |
+| POST /api/v1/analiz/baslat | 20 | 20 | 12.74 ms | 18.59 ms |
+| GET /api/v1/raporlar | 50 | 50 | 13.04 ms | 31.66 ms |
+
+### Değerlendirme
+- Tüm isteklerde **0 başarısız** istek — sistem stabil çalışıyor
+- Profilleme endpoint'i diğerlerine göre yavaş (~95ms) — bellek snapshot aldığı için beklenen bir durum
+- Diğer tüm endpoint'ler 25ms altında yanıt veriyor — performans kabul edilebilir seviyede
+
+---
+
+### Sonuç
+API performans testleri başarıyla tamamlanmıştır. Sistem yük altında stabil çalışmakta ve tüm isteklere yanıt vermektedir.
+
+**Dosyalar:** `tests/performans_testi.py`, `src/api/main.py`
+
+---
+
+# Proje Akışı
+
+## Hafta 6
+
+### Sümeyra Adıyaman
+API performans testleri yapıldı. 170 istek atıldı, 0 hata alındı. Sonuçlar raporlandı.
