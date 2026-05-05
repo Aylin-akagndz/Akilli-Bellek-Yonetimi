@@ -718,7 +718,7 @@ Farklı bellek optimizasyonu tekniklerini araştırıldı ve projemizde kullanı
 
 
 
-# 6. HAFTA ÇALIŞMALARI (2 Mayıs - 9 Mayıs 2026)
+# 6. HAFTA ÇALIŞMALARI (2 Mayıs - 10 Mayıs 2026)
 ---
 
 ## 6.1 👩‍💻 Sümeyra Adıyaman – Performans Testleri ve Optimizasyon
