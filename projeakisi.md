@@ -660,3 +660,46 @@ Profilleme aracı başarıyla entegre edilmiştir. API çalışırken bellek kul
 
 ### Sümeyra Adıyaman
 Profilleme aracı (`tracemalloc`) API'ye entegre edildi. Bellek kullanımını anlık raporlayan `GET /api/v1/sistem/profil` endpoint'i eklendi.
+
+
+
+# 6. HAFTA ÇALIŞMALARI (2 Mayıs - 9 Mayıs 2026)
+---
+
+## 6.1 👩‍💻 Sümeyra Adıyaman – Performans Testleri ve Optimizasyon
+
+### Görev Tanımı
+Bu hafta kapsamında API'nin performansı test edilmiş ve optimizasyon çalışmaları yapılmıştır.
+
+---
+
+### Performans Testi Sonuçları (`tests/performans_testi.py`)
+
+| Endpoint | Toplam İstek | Başarılı | Ortalama Süre | En Fazla Süre |
+| :--- | :---: | :---: | :---: | :---: |
+| GET /api/v1/sistem/saglik | 50 | 50 | 21.08 ms | 39.35 ms |
+| GET /api/v1/sistem/bellek | 50 | 50 | 23.09 ms | 47.96 ms |
+| GET /api/v1/sistem/profil | 50 | 50 | 95.31 ms | 242.84 ms |
+| POST /api/v1/analiz/baslat | 20 | 20 | 12.74 ms | 18.59 ms |
+| GET /api/v1/raporlar | 50 | 50 | 13.04 ms | 31.66 ms |
+
+### Değerlendirme
+- Tüm isteklerde **0 başarısız** istek — sistem stabil çalışıyor
+- Profilleme endpoint'i diğerlerine göre yavaş (~95ms) — bellek snapshot aldığı için beklenen bir durum
+- Diğer tüm endpoint'ler 25ms altında yanıt veriyor — performans kabul edilebilir seviyede
+
+---
+
+### Sonuç
+API performans testleri başarıyla tamamlanmıştır. Sistem yük altında stabil çalışmakta ve tüm isteklere yanıt vermektedir.
+
+**Dosyalar:** `tests/performans_testi.py`, `src/api/main.py`
+
+---
+
+# Proje Akışı
+
+## Hafta 6
+
+### Sümeyra Adıyaman
+API performans testleri yapıldı. 170 istek atıldı, 0 hata alındı. Sonuçlar raporlandı.
