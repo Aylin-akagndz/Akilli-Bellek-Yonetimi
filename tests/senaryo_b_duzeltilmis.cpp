@@ -3,9 +3,9 @@
  * Bellek sızıntıları bulundu ve düzeltilmiş kod oluşturuldu.
  */
 
- hafta4-mustafasahingoz
+ 
 
- main
+ 
 #include <iostream>
 #include <string>
 

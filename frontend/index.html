@@ -19,17 +19,18 @@
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
         }
         .sidebar h2 { margin: 0 0 30px 0; font-size: 18px; color: #333; display: flex; align-items: center; gap: 5px; }
-        .menu-item { font-size: 14px; font-weight: bold; color: #555; cursor: pointer; display: flex; align-items: center; gap: 10px; }
-        .menu-item:hover { color: #000; }
+        .menu-item { font-size: 14px; font-weight: bold; color: #555; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 5px; border-radius: 8px; transition: 0.2s;}
+        .menu-item:hover { color: #000; background: rgba(0,0,0,0.05); }
 
         /* Ana İçerik Alanı */
         .main-content { 
             flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; 
         }
 
+        h1 { font-size: 22px; color: #111; margin-bottom: 30px; }
+
         /* Ekran 1: Analiz Başlatma */
         #ekran-1 { text-align: center; display: block; }
-        h1 { font-size: 22px; color: #111; margin-bottom: 30px; }
         .input-group { 
             background: white; border-radius: 25px; padding: 10px 20px; 
             display: flex; align-items: center; width: 400px; margin-bottom: 30px;
@@ -43,28 +44,33 @@
         }
         .baslat-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
 
-        /* Ekran 2: Sonuç Ekranı (Başlangıçta Gizli) */
+        /* Ekran 2: Sonuç Ekranı */
         #ekran-2 { text-align: center; display: none; }
         .tarih { color: #555; font-size: 12px; margin-bottom: 30px; }
-        
-        /* Kırmızı Halka Grafiği */
         .grafik-halka {
-            width: 120px; height: 120px; border-radius: 50%; 
-            border: 20px solid #cc0000; margin: 0 auto 30px auto;
+            width: 120px; height: 120px; border-radius: 50%; border: 20px solid #cc0000; margin: 0 auto 30px auto;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             background-color: #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         .grafik-deger { font-size: 24px; font-weight: bold; color: #111; line-height: 1; }
         .grafik-etiket { font-size: 12px; color: #555; }
 
-        /* Uyarı Kutuları */
+        /* Ekran 3 ve 4 için Ortak Kutular */
         .uyari-kutusu { 
             background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px);
             border-radius: 15px; padding: 20px; width: 450px; text-align: left;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.3); margin: 0 auto;
         }
-        .uyari-satir { font-size: 14px; color: #333; margin-bottom: 10px; font-weight: 500; }
+        .uyari-satir { font-size: 14px; color: #333; margin-bottom: 15px; font-weight: 500; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 10px;}
+        .uyari-satir:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0;}
         
+        /* Ekran 3: Geçmiş Raporlar */
+        #ekran-3 { text-align: center; display: none; width: 100%;}
+        
+        /* Ekran 4: Ayarlar */
+        #ekran-4 { text-align: center; display: none; width: 100%;}
+        .ayar-etiket { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+
         /* Geri Dön Butonu */
         .geri-btn { margin-top: 20px; background: transparent; border: 1px solid #333; padding: 8px 20px; border-radius: 15px; cursor: pointer; }
     </style>
@@ -74,12 +80,13 @@
     <!-- Sol Menü -->
     <nav class="sidebar">
         <h2>RAM Kurtarıcıları 🛡️</h2>
-        <div class="menu-item">📄 Ana Ekran</div>
-        <div class="menu-item">📁 Geçmiş Raporlar</div>
-        <div class="menu-item">⚙️ Ayarlar</div>
+        <!-- Menülere tıklanınca menuyuAc fonksiyonu çalışacak -->
+        <div class="menu-item" onclick="menuyuAc('ekran-1')">📄 Ana Ekran</div>
+        <div class="menu-item" onclick="menuyuAc('ekran-3')">📁 Geçmiş Raporlar</div>
+        <div class="menu-item" onclick="menuyuAc('ekran-4')">⚙️ Ayarlar</div>
     </nav>
 
-    <!-- Ana Ekran -->
+    <!-- Ana İçerik -->
     <main class="main-content">
         
         <!-- EKRAN 1: Analiz Girdisi -->
@@ -103,11 +110,41 @@
             </div>
 
             <div class="uyari-kutusu">
-                <div class="uyari-satir" id="uyari-1">[UYARI] Veri yükleniyor...</div>
-                <div class="uyari-satir" id="uyari-2">Lütfen bekleyin...</div>
+                <div class="uyari-satir" id="uyari-1" style="border:none;">[UYARI] Veri yükleniyor...</div>
+                <div class="uyari-satir" id="uyari-2" style="border:none;">Lütfen bekleyin...</div>
             </div>
 
-            <button class="geri-btn" onclick="geriDon()">Geri Dön</button>
+            <button class="geri-btn" onclick="menuyuAc('ekran-1')">Yeni Analiz Yap</button>
+        </div>
+
+        <!-- EKRAN 3: Geçmiş Raporlar -->
+        <div id="ekran-3">
+            <h1>Geçmiş Valgrind Raporları</h1>
+            <div class="uyari-kutusu">
+                <div class="uyari-satir">🔴 <strong>chrome.exe</strong> - 16 Bayt Sızıntı (06.05.2026)</div>
+                <div class="uyari-satir">🟢 <strong>hesap_makinesi.out</strong> - 0 Bayt Sızıntı (04.05.2026)</div>
+                <div class="uyari-satir">🔴 <strong>test_senaryosu_a.exe</strong> - 128 Bayt Sızıntı (02.05.2026)</div>
+                <div class="uyari-satir">🟢 <strong>sistem_cekirdegi.out</strong> - 0 Bayt Sızıntı (01.05.2026)</div>
+            </div>
+        </div>
+
+        <!-- EKRAN 4: Ayarlar -->
+        <div id="ekran-4">
+            <h1>Sistem Ayarları</h1>
+            <div class="uyari-kutusu">
+                <div class="uyari-satir">
+                    <label class="ayar-etiket"><input type="checkbox" checked> Otomatik Valgrind Taraması Yap</label>
+                </div>
+                <div class="uyari-satir">
+                    <label class="ayar-etiket"><input type="checkbox" checked> Sızıntı Bulunursa Sesli Uyarı Ver</label>
+                </div>
+                <div class="uyari-satir">
+                    <label class="ayar-etiket"><input type="checkbox"> Detaylı Log Kaydı Tut (main.cpp vb.)</label>
+                </div>
+                <div class="uyari-satir">
+                    <label class="ayar-etiket"><input type="checkbox" disabled> Koyu Tema (Çok Yakında)</label>
+                </div>
+            </div>
         </div>
 
     </main>

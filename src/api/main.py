@@ -4,7 +4,19 @@ from uuid import uuid4
 from datetime import datetime
 from collections import OrderedDict
 import tracemalloc
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware # Bu satırı ekle
+# ... diğer importlar aynı kalsın ...
 
+app = FastAPI(...)
+
+# ŞU BLOĞU HEMEN app = FastAPI'NİN ALTINA EKLE:
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Her yerden gelen isteğe izin ver
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Profilleme başlat
 tracemalloc.start()
 
