@@ -1,22 +1,11 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from uuid import uuid4
 from datetime import datetime
 from collections import OrderedDict
 import tracemalloc
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware # Bu satırı ekle
-# ... diğer importlar aynı kalsın ...
 
-app = FastAPI(...)
-
-# ŞU BLOĞU HEMEN app = FastAPI'NİN ALTINA EKLE:
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"], # Her yerden gelen isteğe izin ver
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 # Profilleme başlat
 tracemalloc.start()
 
@@ -24,6 +13,15 @@ app = FastAPI(
     title="Akıllı Bellek Yönetimi API",
     description="RAM Kurtarıcıları - Mock Prototip v1.0",
     version="1.0"
+)
+
+# NETLİFY İZNİ (CORS AYARI)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 MAKS_OTURUM = 100
@@ -113,17 +111,14 @@ def sistem_bellek():
 
 @app.get("/api/v1/sistem/profil")
 def sistem_profil():
-    # Anlık bellek kullanımı
     anlik, zirve = tracemalloc.get_traced_memory()
-
-    # En çok bellek tüketen 5 nokta
     snapshot = tracemalloc.take_snapshot()
     istatistikler = snapshot.statistics("lineno")[:5]
 
     en_cok_tuketenler = []
     for istat in istatistikler:
         en_cok_tuketenler.append({
-            "dosya": str(istat.traceback[0].filename).split("\\")[-1],
+            "dosya": str(istat.traceback[0].filename).split("/")[-1],
             "satir": istat.traceback[0].lineno,
             "bellek_byte": istat.size,
             "nesne_sayisi": istat.count
