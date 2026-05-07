@@ -3,101 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAM Kurtarıcıları - v1.0</title>
-    <style>
-        body {
-            margin: 0; font-family: 'Segoe UI', sans-serif; display: flex;
-            height: 100vh; overflow: hidden;
-            background: linear-gradient(180deg, #E6E9F0 0%, #D1D9E6 50%, #764ba2 100%);
-        }
-        /* Sidebar Tasarımı */
-        .sidebar {
-            width: 260px; background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(15px); padding: 30px 20px;
-            border-right: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column;
-        }
-        .sidebar h1 { font-size: 1.3rem; margin-bottom: 40px; color: #2c3e50; }
-        .nav-item {
-            padding: 15px; margin-bottom: 8px; cursor: pointer; border-radius: 10px;
-            transition: 0.3s; color: #444; font-weight: 500; display: flex; align-items: center;
-        }
-        .nav-item:hover { background: rgba(255,255,255,0.4); }
-        .nav-item.active { background: rgba(255,255,255,0.6); font-weight: bold; }
-
-        /* İçerik Alanı */
-        .main-content { flex: 1; position: relative; display: flex; justify-content: center; align-items: center; }
-        .page { display: none; width: 100%; max-width: 600px; text-align: center; }
-        .page.active { display: block; }
-
-        /* Analiz Elemanları */
-        input {
-            width: 80%; padding: 15px 25px; border-radius: 35px; border: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 25px; font-size: 16px; outline: none;
-        }
-        .btn {
-            background: #5c6bc0; color: white; border: none; padding: 12px 40px;
-            border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.3s;
-        }
-        .btn:hover { background: #3f51b5; transform: scale(1.05); }
-
-        /* Kırmızı Halka (PDF'deki Gibi) */
-        .gauge {
-            width: 140px; height: 140px; border: 12px solid #d32f2f; border-radius: 50%;
-            margin: 30px auto; display: flex; flex-direction: column; justify-content: center;
-            align-items: center; background: white; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .gauge b { font-size: 32px; color: #333; }
-        .warning-box {
-            background: rgba(0, 0, 0, 0.3); color: white; padding: 25px;
-            border-radius: 15px; text-align: left; font-size: 14px; line-height: 1.6; margin-top: 20px;
-        }
-    </style>
+    <title>RAM Kurtarıcıları | Akıllı Bellek Analiz Sistemi</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="sidebar">
-        <h1>RAM Kurtarıcıları🛡️</h1>
-        <div class="nav-item active" onclick="sayfaDegistir('analiz', this)">🏠 Ana Ekran</div>
-        <div class="nav-item" onclick="sayfaDegistir('raporlar', this)">📊 Geçmiş Raporlar</div>
-        <div class="nav-item" onclick="sayfaDegistir('ayarlar', this)">⚙️ Ayarlar</div>
-    </div>
+    <div class="bg-grid"></div>
 
-    <div class="main-content">
-        <div id="page-analiz" class="page active">
-            <div id="ekran-giris">
-                <h2>Yeni Bellek Analizi</h2>
-                <input type="text" id="app-name" placeholder="Uygulama adı girin: (örn: chrome.exe)">
-                <br>
-                <button class="btn" onclick="analiziBaslat()">VALGRIND ANALİZİNİ BAŞLAT</button>
-            </div>
-            <div id="ekran-sonuc" style="display: none;">
-                <h2 id="result-title">Analiz Sonucu</h2>
-                <p id="result-date" style="opacity: 0.6;">Tarih: Bekleniyor...</p>
-                <div class="gauge">
-                    <b id="leak-value">--</b>
-                    <small>Bayt Sızıntı</small>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo-badge">
+                    <span class="logo-icon">🛡️</span> RAM_SAVER_V1
                 </div>
-                <div class="warning-box" id="warning-text">⚙️ Sunucuya bağlanılıyor...</div>
-                <br>
-                <button class="btn" onclick="location.reload()">Yeni Analiz Yap</button>
+                <div class="header-titles">
+                    <h1>Akıllı Bellek Yönetimi</h1>
+                    <div class="subtitle">PROFILER // REAL-TIME_ANALYSIS</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="system-clock" id="systemClock">00:00:00</div>
+                <div class="header-badge" id="connectionBadge">
+                    <div class="badge-dot"></div>
+                    <span class="badge-text">Çevrimdışı</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="metrics-row">
+            <div class="metric-card">
+                <span class="metric-label">Tespit Edilen Sızıntı</span>
+                <div class="metric-value" id="metricLeaks">0</div>
+                <div class="metric-delta neutral" id="metricLeaksDelta">Beklemede</div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">Giderilen Hata</span>
+                <div class="metric-value success" id="metricFixed">0</div>
+                <div class="metric-delta neutral" id="metricFixedDelta">↓ 0 giderildi</div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">Sızan Toplam Bellek</span>
+                <div class="metric-value" id="metricLeakedMem">0 KB</div>
+                <div class="metric-delta neutral" id="metricMemDelta">Stabil</div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">Analiz Süresi</span>
+                <div class="metric-value" id="metricTime">00:00</div>
+                <div class="metric-delta neutral">Canlı Oturum</div>
             </div>
         </div>
 
-        <div id="page-raporlar" class="page">
-            <h2 style="color: #2c3e50;">Geçmiş Raporlar</h2>
-            <div id="rapor-listesi" class="warning-box">Yükleniyor...</div>
+        <div class="dashboard">
+            
+            <aside class="panel">
+                <div class="panel-header">
+                    <span class="panel-icon">⚙️</span>
+                    <h3>Analiz Ayarları</h3>
+                </div>
+
+                <div class="form-group">
+                    <label>Uygulama Adı</label>
+                    <input type="text" id="appName" placeholder="Örn: bellek_testi" value="Bellek_Test">
+                </div>
+
+                <div class="form-group">
+                    <label>Process ID (PID)</label>
+                    <input type="number" id="pidInput" placeholder="Örn: 1234" value="8421">
+                </div>
+
+                <div class="form-group">
+                    <label>Profilleme Modu</label>
+                    <select id="modeSelect">
+                        <option value="valgrind">Valgrind (Derin Tarama)</option>
+                        <option value="gprof">Gprof (Performans)</option>
+                        <option value="memcheck">Memcheck (Hızlı)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Sızıntı Eşiği (KB)</label>
+                    <input type="number" id="thresholdInput" value="64">
+                </div>
+
+                <div class="divider"></div>
+
+                <button id="startBtn" class="btn-primary">
+                    <span class="btn-icon">▶</span> ANALİZİ BAŞLAT
+                </button>
+                <button id="stopBtn" class="btn-danger" disabled>
+                    <span class="btn-icon">⏹</span> DURDUR
+                </button>
+                <button id="fixAllBtn" class="btn-success" disabled>
+                    <span class="btn-icon">🛠</span> TÜMÜNÜ GİDER
+                </button>
+
+                <div class="divider"></div>
+
+                <div class="info-block">
+                    <div class="info-row">
+                        <span class="info-key">OTURUM ID:</span>
+                        <span class="info-val" id="sessionId">—</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-key">ARAÇ:</span>
+                        <span class="info-val" id="infoTool">Bekleniyor</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-key">DURUM:</span>
+                        <span class="info-val" id="infoStatus">Beklemede</span>
+                    </div>
+                </div>
+            </aside>
+
+            <main style="display: flex; flex-direction: column; gap: 20px;">
+                
+                <section class="panel">
+                    <div class="panel-header">
+                        <span class="panel-icon">📈</span>
+                        <h3>Bellek Tüketim Grafiği</h3>
+                        <div class="chart-legend">
+                            <span><span class="legend-dot used"></span>RAM</span>
+                            <span><span class="legend-dot leak"></span>Sızıntı</span>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="memoryChart"></canvas>
+                        <div id="chartOverlay" class="chart-overlay">
+                            <span class="overlay-icon">📊</span>
+                            <p>Veri akışı bekleniyor...<br>Analizi başlattığınızda grafik canlanacaktır.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel leak-panel">
+                    <div class="panel-header">
+                        <span class="panel-icon">⚠️</span>
+                        <h3>Sızıntı Detayları</h3>
+                        <span class="leak-count-badge" id="leakCountBadge">0 aktif sızıntı</span>
+                    </div>
+                    <div class="leak-table-wrapper">
+                        <table class="leak-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>ADRES</th>
+                                    <th>BOYUT</th>
+                                    <th>FONKSİYON</th>
+                                    <th>DOSYA</th>
+                                    <th>SATIR</th>
+                                    <th>ÖNCELİK</th>
+                                    <th>DURUM</th>
+                                    <th>İŞLEM</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leakTableBody">
+                                <tr class="empty-row">
+                                    <td colspan="9">Henüz sızıntı tespit edilmedi</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
         </div>
 
-        <div id="page-ayarlar" class="page">
-            <h2 style="color: #2c3e50;">Sistem Ayarları</h2>
-            <div class="warning-box">
-                <b>Backend Durumu:</b> Bağlı (Render) ✅<br>
-                <b>Mod:</b> Simülasyon v1.0<br>
-                <b>Geliştirici:</b> RAM Kurtarıcıları Ekibi
+        <footer class="log-section">
+            <div class="log-header">
+                <div class="log-title">
+                    <span class="panel-icon">💻</span>
+                    <h3>Sistem Günlüğü (Terminal)</h3>
+                </div>
+                <div class="log-controls">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="autoScroll" checked> Otomatik Kaydır
+                    </label>
+                    <button class="btn-ghost" id="clearBtn">TEMİZLE</button>
+                </div>
             </div>
-        </div>
+            <div class="log-container" id="logs">
+                <span class="log-line log-info">[SYS] Profilleme aracı hazır — analiz başlatmak için butona tıklayın</span>
+            </div>
+        </footer>
     </div>
 
-    <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
