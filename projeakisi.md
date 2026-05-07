@@ -759,6 +759,18 @@ Dört teknik birlikte uygulanmış; struct boyutu -%50 küçültülmüş, gereks
 **Eklenen dosyalar:** `tests/veri_havuzu_test.cpp`  
 **Durum:** ✅ Tamamlandı
 
+5.4 👨‍💻 Yusuf Tuğra Deveci – Bellek Yönetimi Entegrasyonu ve Veri Akış Kontrolü
+Görev Tanımı:
+Bu hafta kapsamında, backend tarafında optimize edilen veri yapılarının (Object Pool ve RAII) sisteme tam entegrasyonu sağlanmış ve analiz verilerinin Frontend arayüzüne kayıpsız aktarımı için veri akış kontrolü mekanizması kurulmuştur.
+
+Yapılan Çalışmalar:
+
+Entegrasyon: Semanur tarafından optimize edilen AnalizVerisi ve VeriHavuzu modülleri, ana sistem motoruna entegre edildi.
+
+Veri Akış Denetimi: Bellek analiz sonuçlarının (Valgrind çıktıları) JSON formatına dönüştürülme hızı optimize edilerek, büyük veri setlerinde oluşabilecek gecikmeler engellendi.
+
+Performans İzleme: Geliştirilen C++ motorunun, Sümeyra’nın entegre ettiği tracemalloc API’si ile uyumlu çalışıp çalışmadığı denetlendi.
+
 ---
 
 # Proje Akışı
@@ -776,6 +788,8 @@ Farklı bellek optimizasyonu tekniklerini araştırıldı ve projemizde kullanı
 ### Semanur Buhan
 Backend veri yapıları `std::unique_ptr`, `enum class` ve `std::string_view` ile optimize edildi. `AnalizVerisi` struct boyutu 48 bayttan 24 bayta indirildi (-%50). Gereksiz kopyalar eliminate edildi, Valgrind'de 0 sızıntı doğrulandı.
 
+### Yusuf Tuğra Deveci
+ Optimize edilen backend modüllerinin (Object Pool/RAII) sistem entegrasyonu tamamlandı ve veri akış hızı denetlendi.
 
 
 # 6. HAFTA ÇALIŞMALARI (2 Mayıs - 10 Mayıs 2026)
@@ -812,10 +826,25 @@ API performans testleri başarıyla tamamlanmıştır. Sistem yük altında stab
 
 ---
 
+6.2 👨‍💻 Yusuf Tuğra Deveci – Sistem Stabilitesi ve Final Entegrasyon Testleri
+Görev Tanımı:
+Projenin final teslimi öncesinde, C++ backend motoru ve Python API arasındaki uçtan uca (End-to-End) veri iletimi test edilmiş, sistemin uzun süreli çalışma stabilitesi doğrulanmıştır.
+
+Yapılan Çalışmalar:
+
+Stabilite Testleri: Sümeyra'nın yaptığı performans testlerine paralel olarak, C++ tarafında uzun süreli bellek analizlerinde (stress test) herhangi bir şişme veya kopma olup olmadığı gözlemlendi.
+
+Hiyerarşi Düzenlemesi: Proje dosyalarının grup yöneticisinin istediği formatta (src/, frontend/, analiz.sh) yapılandırılması ve Pull Request (PR) süreçlerinin yönetimi sağlandı.
+
+Final Kontrol: Valgrind üzerinden yapılan son kontrollerde, tüm sistemin "Zero Leak" (Sıfır Sızıntı) prensibine uygun çalıştığı teyit edildi.
+
 # Proje Akışı
 
 ## Hafta 6
 
 ### Sümeyra Adıyaman
 API performans testleri yapıldı. 170 istek atıldı, 0 hata alındı. Sonuçlar raporlandı.
+
+### Yusuf Tuğra Deveci
+Sistem genelinde uçtan uca stabilite testleri yapıldı. Proje dosyaları istenen klasör hiyerarşisine (src, frontend, root) göre düzenlenerek final teslimine hazır hale getirildi.
 
