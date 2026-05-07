@@ -1,6 +1,6 @@
 'use strict';
 
-const API_BASE   = 'http://127.0.0.1:8000/api/v1';
+const API_BASE = 'https://akilli-bellek-yonetimi-production.up.railway.app';
 const MAX_POINTS = 40;
 
 const dom = {
