@@ -773,6 +773,45 @@ Performans İzleme: Geliştirilen C++ motorunun, Sümeyra’nın entegre ettiği
 
 ---
 
+## 5.5 🔄 Aylin Akagündüz – Gereksiz Nesne Oluşturulmasının Engellenmesi
+
+### Görev Tanımı
+
+Bu hafta kapsamında, uygulamada gereksiz nesne oluşturulmasını engelleyen stratejiler araştırılmış ve nesnelerin yeniden kullanılmasını sağlayan teknikler projeye entegre edilmiştir.
+
+---
+
+### Problem Tanımı
+
+C++ uygulamalarında her `new` çağrısı hem zaman hem de bellek maliyeti doğurur. Özellikle kısa ömürlü ve sık oluşturulan nesneler (analiz sonuç nesneleri, bellek rapor kayıtları gibi) sürekli tahsis/serbest bırakma döngüsüne girdiğinde:
+
+- Bellek parçalanması (fragmentation) artar
+- `malloc/free` overhead'i performansı düşürür
+- Gereksiz yıkıcı (destructor) çağrıları CPU zamanı harcar
+
+---
+
+### Uygulanan Teknikler
+
+**1. Nesne Havuzu (Object Pool) Tasarım Deseni**
+
+Nesneler yok edilmek yerine havuza geri bırakılır ve ihtiyaç duyulduğunda tekrar kullanılır. Yusuf'un Hafta 4'te geliştirdiği `VeriHavuzu` modülü bu prensip üzerine kurulmuştu. Bu hafta aynı yaklaşım, analiz sonuç nesnelerine (`AnalizSonucu`) uygulandı.
+
+- Nesne havuzu başlangıçta sabit sayıda nesneyi önceden oluşturur
+- `al()` ile havuzdan nesne alınır, `geriKoy()` ile iade edilir
+- Havuz dolduğunda yeni nesne oluşturulur, boşaldığında yeniden kullanılır
+
+**2. Move Semantics (C++11)**
+
+Gereksiz kopya (copy) oluşturulmasını önlemek için `std::move` kullanımı benimsendi. Büyük nesneler kopyalanmak yerine taşınarak bellek ve CPU tasarrufu sağlandı.
+
+---
+
+### Sonuç
+
+Bu hafta uygulanan teknikler sayesinde kısa ömürlü nesnelerin sürekli oluşturulup yok edilmesi engellenmiş, bellek kullanımı daha öngörülebilir ve verimli hale getirilmiştir. Geliştirilen `NesneHavuzu` modülü Yusuf'un `VeriHavuzu` altyapısıyla uyumlu çalışmaktadır.
+
+
 # Proje Akışı
 
 ## Hafta 5
@@ -791,6 +830,8 @@ Backend veri yapıları `std::unique_ptr`, `enum class` ve `std::string_view` il
 ### Yusuf Tuğra Deveci
  Optimize edilen backend modüllerinin (Object Pool/RAII) sistem entegrasyonu tamamlandı ve veri akış hızı denetlendi.
 
+### Aylin Akagündüz
+Gereksiz nesne oluşturulmasını engelleyen teknikler araştırıldı, Object Pool ve Move Semantics projeye entegre edildi.
 
 # 6. HAFTA ÇALIŞMALARI (2 Mayıs - 10 Mayıs 2026)
 ---
