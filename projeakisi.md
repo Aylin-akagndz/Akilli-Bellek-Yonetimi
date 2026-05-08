@@ -879,8 +879,28 @@ Hiyerarşi Düzenlemesi: Proje dosyalarının grup yöneticisinin istediği form
 
 Final Kontrol: Valgrind üzerinden yapılan son kontrollerde, tüm sistemin "Zero Leak" (Sıfır Sızıntı) prensibine uygun çalıştığı teyit edildi.
 
+---
 
-## 6.3 Mustafa Şahingöz - Bellek Optimizasyonu Araştırması ve Analiz Raporu
+## 6.3 👩‍💻 Semanur Buhan – Proje Dokümantasyonu Tamamlama
+
+Görev Tanımı:
+Akıllı Bellek Yönetimi projesinin geliştirme süreçleri tamamlandıktan sonra; sistemin mimarisini, çalışma mantığını, kod açıklamalarını ve kullanım adımlarını içeren kapsamlı teknik dokümantasyonun hazırlanması ve siteye entegre edilmesi.
+
+Yapılan Çalışmalar:
+
+Teknik İçerik Geliştirme: Sistem mimarisi, C++ backend ve Python frontend arasındaki haberleşme mantığı akademik ve teknik standartlara uygun olarak detaylandırıldı.
+
+Kılavuz Hazırlığı: Kullanıcılar ve geliştiriciler için adım adım kurulum yönergeleri ile proje dizin yapısının (özellikle "tests" ve "analiz" klasörlerinin işlevlerinin) kullanımını içeren rehberler oluşturuldu.
+
+**Siteye Entegrasyon: Hazırlanan bu detaylı proje dokümantasyonu, herkesin erişebilmesi ve projenin incelenebilmesi için resmi olarak siteye yüklendi**.
+
+### Sonuç 
+Proje dokümantasyonu **eksiksiz olarak tamamlanmış ve siteye başarılı bir şekilde eklenmiştir**. Sistem yüklemeye ve incelemeye hazırdır.
+
+
+---
+
+## 6.4 Mustafa Şahingöz - Bellek Optimizasyonu Araştırması ve Analiz Raporu
 
 ---
 
@@ -920,6 +940,8 @@ API performans testleri yapıldı. 170 istek atıldı, 0 hata alındı. Sonuçla
 ### Yusuf Tuğra Deveci
 Sistem genelinde uçtan uca stabilite testleri yapıldı. Proje dosyaları istenen klasör hiyerarşisine (src, frontend, root) göre düzenlenerek final teslimine hazır hale getirildi.
 
+### Semanur Buhan
+"Akıllı Bellek Yönetimi" uygulamasının tüm geliştirme süreçleri başarıyla tamamlandı. Proje dokümantasyonu **siteye başarılı bir şekilde yüklendi.**
 ### Mustafa Şahingöz
 Projenin genel testlerini yapıldı ve bulunan hataları ayıklandı. Tüm özelliklerin beklendiği gibi çalışıp çalışmadığı kontrol edildi.
 
