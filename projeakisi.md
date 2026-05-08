@@ -879,6 +879,37 @@ Hiyerarşi Düzenlemesi: Proje dosyalarının grup yöneticisinin istediği form
 
 Final Kontrol: Valgrind üzerinden yapılan son kontrollerde, tüm sistemin "Zero Leak" (Sıfır Sızıntı) prensibine uygun çalıştığı teyit edildi.
 
+
+## 6.3 Mustafa Şahingöz - Bellek Optimizasyonu Araştırması ve Analiz Raporu
+
+---
+
+## 🎯 Test Senaryosu ve Kapsam
+Bu çalışma kapsamında, yerel ortamda geliştirilen uygulama bulut tabanlı sunuculara (Cloud) taşınmış ve gerçek dünya senaryoları altında test edilmiştir. Mimari yapı; **Vercel** (Frontend) ve **Railway** (Backend) sunucularının eş zamanlı haberleşmesi üzerinden simüle edilmiştir.
+
+## 🛠 Tespit Edilen Hatalar ve Uygulanan Çözümler
+
+### 1. CORS Güvenlik Politikası Engeli
+- **Sorun:** Farklı domainler (Vercel -> Railway) arasındaki veri trafiğinin tarayıcı tarafından güvenlik gerekçesiyle engellenmesi.
+- **Çözüm:** FastAPI backend koduna `CORSMiddleware` kütüphanesi entegre edildi ve tüm metotlar için erişim izni tanımlandı.
+
+### 2. API Endpoint ve Path Hataları (404 Not Found)
+- **Sorun:** Arayüzün (Frontend) `/analiz/baslat` adresine istek göndermesine rağmen, sunucunun (Backend) farklı bir yol yapısı beklemesi sonucu oluşan bağlantı kopukluğu.
+- **Çözüm:** `main.py` ve `app.js` dosyaları arasındaki URL yolları (Endpoints) normalize edilerek tam uyum sağlandı.
+
+### 3. Veri Şeması Uyumsuzluğu (422 Unprocessable Entity)
+- **Sorun:** Gönderilen analiz verilerinin backend tarafındaki katı veri modellerine takılması ve isteğin reddedilmesi.
+- **Çözüm:** Backend tarafında "Flexible Request Processing" (Esnek İstek İşleme) yapısı kurgulandı; gelen JSON verilerinin dinamik olarak işlenmesi sağlandı.
+
+## 🚀 Sonuç ve Onay
+Yapılan final testleri sonucunda uygulama;
+- Canlı ortamda (Production) stabil bir şekilde çalışmaktadır.
+- Gerçek zamanlı grafik çizimi ve bellek analiz verilerini başarıyla çekmektedir.
+- Kullanıcı arayüzü ile sunucu arasındaki tüm veri alışverişi hatasız (200 OK) olarak gerçekleşmektedir.
+
+---
+*Bu rapor Mustafa Şahingöz tarafından Hafta 6 proje çıktılarını belgelemek amacıyla oluşturulmuştur.*
+
 # Proje Akışı
 
 ## Hafta 6
