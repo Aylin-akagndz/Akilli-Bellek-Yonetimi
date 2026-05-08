@@ -920,3 +920,6 @@ API performans testleri yapıldı. 170 istek atıldı, 0 hata alındı. Sonuçla
 ### Yusuf Tuğra Deveci
 Sistem genelinde uçtan uca stabilite testleri yapıldı. Proje dosyaları istenen klasör hiyerarşisine (src, frontend, root) göre düzenlenerek final teslimine hazır hale getirildi.
 
+### Mustafa Şahingöz
+Projenin genel testlerini yapıldı ve bulunan hataları ayıklandı. Tüm özelliklerin beklendiği gibi çalışıp çalışmadığı kontrol edildi.
+
