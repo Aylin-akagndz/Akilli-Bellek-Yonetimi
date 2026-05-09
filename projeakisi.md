@@ -930,6 +930,53 @@ Yapılan final testleri sonucunda uygulama;
 ---
 *Bu rapor Mustafa Şahingöz tarafından Hafta 6 proje çıktılarını belgelemek amacıyla oluşturulmuştur.*
 
+## 6.5 🎤 Aylin Akagündüz – Final Sunum Hazırlığı
+
+### Görev Tanımı
+
+Bu hafta kapsamında, RAM Kurtarıcıları projesinin 6 haftalık çalışmalarını kapsayan final sunumu hazırlanmıştır. Sunumda projenin amaçları, kullanılan yöntemler, elde edilen teknik sonuçlar ve gelecek planları yer almaktadır.
+
+---
+
+### Yapılan Çalışmalar
+
+**1. Sunum İçeriğinin Oluşturulması**
+
+Tüm haftalara ait projeakisi.md dosyası incelenerek her ekip üyesinin katkıları, teknik kararlar ve ölçüm sonuçları derlendi. 12 slaytlık kapsamlı bir sunum hazırlandı.
+
+**2. Sunum Yapısı**
+
+| Slayt | İçerik |
+| :--- | :--- |
+| 1 | Kapak – Ekip ve proje tanıtımı |
+| 2 | Projenin amacı ve kapsam dışı maddeler |
+| 3 | Kullanılan teknolojiler ve seçim gerekçeleri |
+| 4 | Sistem mimarisi (4 katman + risk özeti) |
+| 5 | Haftalık ilerleme – H1, H2, H3 |
+| 6 | Haftalık ilerleme – H4, H5, H6 |
+| 7 | Teknik sonuçlar ve performans ölçüm tablosu |
+| 8 | Ekip katkıları |
+| 9 | Valgrind analizi: Senaryo-B öncesi/sonrası |
+| 10 | Uygulanan 6 bellek optimizasyon tekniği |
+| 11 | Gelecek planları |
+| 12 | Kapanış |
+
+**3. Öne Çıkan Teknik Sonuçlar**
+
+- `AnalizVerisi` struct boyutu **48 → 24 bayt** (-%50) — Semanur'un H5 optimizasyonu
+- Valgrind: **0 hata, 0 byte sızıntı** — "All heap blocks were freed"
+- **170 API isteği**, 0 başarısız — Sümeyra'nın H6 performans testi
+- zlib sıkıştırma ile **%65 oranında** bellek tasarrufu
+
+---
+
+### Sonuç
+
+Final sunumu tüm ekibin 6 haftalık çalışmasını kapsamlı ve görsel bir şekilde özetlemektedir.
+
+**Durum:** ✅ Tamamlandı, siteye başarılı bir şekilde yüklendi.
+
+
 # Proje Akışı
 
 ## Hafta 6
@@ -942,6 +989,12 @@ Sistem genelinde uçtan uca stabilite testleri yapıldı. Proje dosyaları isten
 
 ### Semanur Buhan
 "Akıllı Bellek Yönetimi" uygulamasının tüm geliştirme süreçleri başarıyla tamamlandı. Proje dokümantasyonu **siteye başarılı bir şekilde yüklendi.**
+
 ### Mustafa Şahingöz
 Projenin genel testlerini yapıldı ve bulunan hataları ayıklandı. Tüm özelliklerin beklendiği gibi çalışıp çalışmadığı kontrol edildi.
+
+### Aylin Akagündüz
+Projenin 6 haftalık çalışmalarını kapsayan 12 slaytlık final sunumu hazırlandı, siteye yüklendi. Teknik sonuçlar, ekip katkıları ve gelecek planları sunuma dahil edildi.
+
+
 
