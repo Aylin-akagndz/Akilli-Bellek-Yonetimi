@@ -974,7 +974,7 @@ Tüm haftalara ait projeakisi.md dosyası incelenerek her ekip üyesinin katkıl
 
 Final sunumu tüm ekibin 6 haftalık çalışmasını kapsamlı ve görsel bir şekilde özetlemektedir.
 
-**Durum:** ✅ Tamamlandı
+**Durum:** ✅ Tamamlandı, siteye başarılı bir şekilde yüklendi.
 
 
 # Proje Akışı
@@ -994,7 +994,7 @@ Sistem genelinde uçtan uca stabilite testleri yapıldı. Proje dosyaları isten
 Projenin genel testlerini yapıldı ve bulunan hataları ayıklandı. Tüm özelliklerin beklendiği gibi çalışıp çalışmadığı kontrol edildi.
 
 ### Aylin Akagündüz
-Projenin 6 haftalık çalışmalarını kapsayan 12 slaytlık final sunumu hazırlandı. Teknik sonuçlar, ekip katkıları ve gelecek planları sunuma dahil edildi.
+Projenin 6 haftalık çalışmalarını kapsayan 12 slaytlık final sunumu hazırlandı, siteye yüklendi. Teknik sonuçlar, ekip katkıları ve gelecek planları sunuma dahil edildi.
 
 
 
